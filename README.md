@@ -1,30 +1,34 @@
 # ES6-chat
 
+## Installation instructions
+
+Simply clone it and run:
+
+get dependencies:
+```$ npm install```
+
+build stuff:
+```$ grunt ```
+
+run app:
+```$ npm start ```
+
 ## Components
-###Frontend
+####Frontend
 BackboneJS - ES6 used
 Babel (for ES6 transcript)
 lodash
 jQuery
 
-###Backend
+####Backend
 nodeJS
 MongoDB
 socket.io
 express
 
-###Doku
+####Doku
 doccoo
 /doc directory
 
-###Code Coverage
+####Code Coverage
 Istanbul
-
-
-## Installation instructions
-
-Simply clone it and run:
-
-```$ npm install```
-
-```$ grunt ```
