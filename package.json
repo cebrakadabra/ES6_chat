@@ -1,0 +1,37 @@
+{
+  "name": "ES6_chat",
+  "version": "1.0.0",
+  "main": "Gruntfile.js",
+  "description": "a chat application that uses ES6 in frontend and nodejs with mongoDB as backend",
+  "scripts": {
+    "test": "npm test"
+  },
+  "dependencies": {
+    "jquery": "^2.1.1",
+    "express": "~2.5.8",
+    "ejs": "~0.7.1",
+    "socket.io": "~0.9.6"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "~0.12.2",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "0.6.1",
+    "grunt-babel": "^5.0.0",
+    "matchdep": "~0.1.2",
+    "napa": "^1.2.0",
+    "shelljs": "^0.2.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cebrakadabra/ES6_chat.git"
+  },
+  "author": "Christoph Eberl, Bernhard Zweimüller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cebrakadabra/ES6_chat/issues"
+  },
+  "homepage": "https://github.com/cebrakadabra/ES6_chat"
+}
