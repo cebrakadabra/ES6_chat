@@ -4,16 +4,34 @@
   "main": "Gruntfile.js",
   "description": "a chat application that uses ES6 in frontend and nodejs with mongoDB as backend",
   "scripts": {
-    "test": "npm test"
+    "postinstall": "napa",
+    "prestart": "npm install",
+    "test": "npm test",
+    "start": "node app"
+  },
+  "napa": {
+    "angular-cookies": "angular/bower-angular-cookies#v1.2.23",
+    "angular-route": "angular/bower-angular-route"
+  },
+  "browser": {
+    "angular-cookies": "./node_modules/angular-cookies/angular-cookies.js"
   },
   "dependencies": {
+    "angular": "^1.2.23",
+    "angular-ui-router": "^0.2.11",
+    "angular-mocks": "~1.2.x",
+    "angular-animate": "~1.2.x",
+    "angular-resource": "~1.2.x",
+    "angular-route": "~1.2.x",
     "jquery": "^2.1.1",
     "express": "~2.5.8",
     "ejs": "~0.7.1",
     "socket.io": "~0.9.6"
   },
   "devDependencies": {
+    "browserify-shim": "^3.8.0",
     "grunt": "^0.4.5",
+    "grunt-browserify": "^3.5.0",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-cssmin": "~0.12.2",
     "grunt-contrib-jshint": "^0.11.0",
@@ -23,6 +41,24 @@
     "matchdep": "~0.1.2",
     "napa": "^1.2.0",
     "shelljs": "^0.2.6"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "angular": {
+      "depends": "jquery:jQuery",
+      "exports": "angular"
+    },
+    "angular-cookies": {
+      "depends": "angular",
+      "exports": "angular.module('ngCookies').name"
+    },
+    "angular-ui-router": {
+      "depends": "angular"
+    }
   },
   "repository": {
     "type": "git",

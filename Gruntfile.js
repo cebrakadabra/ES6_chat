@@ -1,3 +1,5 @@
+module.exports = function(grunt) {
+
 // Load Grunt tasks declared in the package.json file
 require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -8,9 +10,22 @@ grunt.initConfig({
         },
         dist: {
             files: {
-                'dist/app.js': 'src/app.js'
+                'dist/js/transcriptedapp.js': 'dist/js/build.js'
             }
         }
+    },
+    browserify: {
+      js: {
+        // A single entry point for our app
+        src: [
+          'app/js/app.js',
+          'app/js/controller/*.js',
+          'app/js/services/*.js',
+          'app/js/directives/*.js'
+        ],
+        // Compile to a single file to add a script tag for in your HTML
+        dest: 'dist/js/build.js',
+      }
     },
     cssmin: {
       options: {
@@ -42,7 +57,7 @@ grunt.initConfig({
         cwd: 'app/',
         src: ['fonts/*'],
         dest: 'dist/',
-      },
+      }
     },
     jshint: {
       // define the files to lint
@@ -75,9 +90,12 @@ grunt.initConfig({
         files: ['<%= jshint.files %>'],
         tasks: ['jshint']
       }
+    }
 });
 
 // register Grunt tasks
-grunt.registerTask('default', ['babel', 'cssmin', 'copy', 'jshint']);
-grunt.registerTask('dev', ['babel', 'cssmin', 'copy', 'jshint', 'watch']);
- grunt.registerTask('prod', ['babel', 'cssmin', 'copy', 'jshint']);
+grunt.registerTask('default', ['browserify', 'babel', 'cssmin', 'copy', 'jshint']);
+grunt.registerTask('dev', ['browserify', 'babel', 'cssmin', 'copy', 'jshint', 'watch']);
+grunt.registerTask('prod', ['browserify', 'babel', 'cssmin', 'copy', 'jshint']);
+
+};
