@@ -10,7 +10,7 @@ grunt.initConfig({
         },
         dist: {
             files: {
-                'dist/js/transcriptedapp.js': 'dist/js/build.js'
+                'dist/public/js/transcriptedapp.js': 'dist/public/js/build.js'
             }
         }
     },
@@ -24,7 +24,7 @@ grunt.initConfig({
           'app/js/directives/*.js'
         ],
         // Compile to a single file to add a script tag for in your HTML
-        dest: 'dist/js/build.js',
+        dest: 'dist/public/js/build.js',
       }
     },
     cssmin: {
@@ -34,7 +34,7 @@ grunt.initConfig({
       },
       target: {
         files: {
-          'dist/css/build.css': ['app/css/*.css']
+          'dist/public/css/build.css': ['app/css/*.css']
         }
       }
     },

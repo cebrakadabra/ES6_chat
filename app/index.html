@@ -1,1 +1,22 @@
-hallo
+<!doctype html>
+<!-- Specify the AngularJS app to use -->
+<html lang="en" ng-app="chatApp">
+<head>
+  <meta charset="utf-8">
+  <title>ES6 Chat</title>
+  <!-- The css is copied into dist/css/app.css by the copy task -->
+  <link rel="stylesheet" href="css/build.css"/>
+
+</head>
+<body ng-controller="MainCtrl">
+  hallo
+  <!-- A simple AngularJS view -->
+  <div ng-view ng-animate class="slideanimation"></div>
+
+  <script src="js/build.js"></script>
+
+
+
+
+</body>
+</html>

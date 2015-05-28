@@ -5,16 +5,34 @@
 	****************************************
 */
 
-var app = require('express')(),
+var express = require('express')
+    app = express(),
     server = require('http').createServer(app),
     io = require('socket.io').listen(server);
 
-server.listen(1337);
+// set our port
+var port = process.env.PORT || 1337;
+
+app.use(express.static(__dirname + '/dist/public'));
+app.use('/partials', express.static(__dirname + '/dist/partials'));
 
 // routing
 app.get('/', function (req, res) {
     res.sendfile(__dirname + '/dist/index.html');
 });
+
+
+
+server.listen(port);
+
+console.log("Magic happens on localhost:"+port);
+
+// expose app
+exports = module.exports = app;
+
+
+
+
 
 
 // usernames which are currently connected to the chat
