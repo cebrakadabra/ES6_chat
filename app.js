@@ -13,6 +13,7 @@ var express = require('express')
 // set our port
 var port = process.env.PORT || 1337;
 
+// use of static files
 app.use(express.static(__dirname + '/dist/public'));
 app.use('/partials', express.static(__dirname + '/dist/partials'));
 
@@ -22,11 +23,9 @@ app.get('/', function (req, res) {
 });
 
 
-
+// let server listen on port
 server.listen(port);
-
 console.log("Magic happens on localhost:"+port);
-
 // expose app
 exports = module.exports = app;
 
