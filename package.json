@@ -2,10 +2,10 @@
   "name": "ES6_chat",
   "version": "1.0.0",
   "main": "Gruntfile.js",
+  "private": true,
   "description": "a chat application that uses ES6 in frontend and nodejs with mongoDB as backend",
   "scripts": {
     "postinstall": "napa",
-    "prestart": "npm install",
     "test": "npm test",
     "start": "node app"
   },
@@ -24,9 +24,8 @@
     "angular-resource": "~1.2.x",
     "angular-route": "~1.2.x",
     "jquery": "^2.1.1",
-    "express": "~2.5.8",
-    "ejs": "~0.7.1",
-    "socket.io": "~0.9.6"
+    "express": "3.1.0",
+    "socket.io": "*"
   },
   "devDependencies": {
     "browserify-shim": "^3.8.0",

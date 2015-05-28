@@ -13,7 +13,7 @@ server.listen(1337);
 
 // routing
 app.get('/', function (req, res) {
-    res.sendfile(__dirname + '/index.html');
+    res.sendfile(__dirname + '/dist/index.html');
 });
 
 
