@@ -14,7 +14,7 @@ angular.module('chatapp.controller', [])
 		$scope.users = UserService.get();
 		console.log($scope.users);
 
-		UserService.create({name: 'Salzburg from angular!!'});
+		// UserService.create({name: 'Salzburg from angular!!'});
 
 
 
