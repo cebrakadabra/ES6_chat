@@ -5,10 +5,15 @@
 	****************************************
 */
 
-var express = require('express')
+var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     io = require('socket.io').listen(server);
+
+// import and bind api
+var api = require("./api");
+app.use( api );
+
 
 // set our port
 var port = process.env.PORT || 1337;
@@ -31,14 +36,17 @@ exports = module.exports = app;
 
 
 
-
-
-
 // usernames which are currently connected to the chat
 var usernames = {};
 
 // rooms which are currently available in chat
 var rooms = ['Österreich','Salzburg','Wien'];
+
+// var rooms  = array();
+
+
+
+
 
 io.sockets.on('connection', function (socket) {
 
@@ -60,16 +68,18 @@ io.sockets.on('connection', function (socket) {
 		    // we store the username in the socket session for this client
 			socket.username = username;
 			// store the room name in the socket session for this client
-			socket.room = 'Österreich';
+			//socket.room = 'Österreich';
+      socket.room = rooms[0];
+
 			// add the client's username to the global list
 			usernames[username] = username;
 			// send client to room 1
-			socket.join('Österreich');
+			socket.join(rooms[0]);
 			// echo to client they've connected
 			socket.emit('updatechat', 'SERVER', 'you have connected');
 			// echo globally (all clients) that a person has connected
-			socket.broadcast.to('Österreich').emit('updatechat', 'SERVER', username + ' has connected');
-			socket.emit('updaterooms', rooms, 'Österreich');
+			socket.broadcast.to(rooms[0]).emit('updatechat', 'SERVER', username + ' has connected');
+			socket.emit('updaterooms', rooms, rooms[0]);
 			// update the list of users in chat, client-side
 			io.sockets.emit('updateusers', usernames, socket.room);
 
@@ -98,7 +108,10 @@ io.sockets.on('connection', function (socket) {
 
 	// If you want to add additional Chatrooms
 	socket.on('createRoom', function(newroom){
-		rooms.push(newroom);
+
+    //remove
+    rooms.push(newroom);
+
 		//socket.emit('updateroomwithnewroom', newroom);
 		socket.emit('updaterooms', rooms, socket.room);
 		socket.broadcast.emit('updaterooms', rooms, socket.room);
@@ -107,7 +120,7 @@ io.sockets.on('connection', function (socket) {
 
 	// when the user disconnects.. perform this
 	socket.on('disconnect', function(){
-		// remove the username from global usernames list
+    // remove the username from global usernames list
 		delete usernames[socket.username];
 		// update list of users in chat, client-side
 		io.sockets.emit('updateusers', usernames);

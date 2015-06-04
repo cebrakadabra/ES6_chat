@@ -2,7 +2,20 @@ angular.module('chatapp.controller', [])
 /***
  *
  */
-	.controller('MainCtrl', ['$scope', '$location', '$anchorScroll', '$interval', '$timeout', function ($scope, $location, $anchorScroll, $interval, $timeout) {
+	.controller('MainCtrl', ['$scope', '$location', '$anchorScroll', '$interval', '$timeout', 'RoomService', 'UserService', function ($scope, $location, $anchorScroll, $interval, $timeout, RoomService, UserService) {
+
+
+		//EXAMPLE
+
+		//Use Roomservice to call the api that calls mongoose that calls mongodb ;)
+		$scope.rooms = RoomService.get();
+		console.log($scope.rooms);
+
+		$scope.users = UserService.get();
+		console.log($scope.users);
+
+		UserService.create({name: 'Salzburg from angular!!'});
+
 
 
 
@@ -131,14 +144,14 @@ angular.module('chatapp.controller', [])
 
 	}])
 
-	.controller('HomeController', ['$scope', '$location', '$anchorScroll', '$interval', '$timeout', function ($scope, $location, $anchorScroll, $interval, $timeout) {
+	.controller('HomeController', ['$scope', '$location', '$anchorScroll', '$interval', '$timeout', 'RoomService', 'UserService', function ($scope, $location, $anchorScroll, $interval, $timeout, RoomService, UserService) {
 
 
 
 	}])
 
 
-	.controller('RoomController', ['$scope', '$sce', '$location', '$anchorScroll', '$interval', '$timeout', 'ResultService', function ($scope, $sce, $location, $anchorScroll, $interval, $timeout, ResultService) {
+	.controller('RoomController', ['$scope', '$sce', '$location', '$anchorScroll', '$interval', '$timeout', 'ResultService', 'RoomService', 'UserService', function ($scope, $sce, $location, $anchorScroll, $interval, $timeout, ResultService, RoomService, UserService) {
 
 
 

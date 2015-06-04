@@ -7,10 +7,16 @@ Simply clone it and run:
 get dependencies:
 ```$ npm install```
 
+
+Install mongoDB Server:
+http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
+
+
 build stuff:
 ```$ grunt ```
 
 run app:
+```$ mongod ```
 ```$ npm start ```
 
 ## Components
