@@ -25,6 +25,7 @@
     "angular-route": "~1.2.x",
     "jquery": "^2.1.1",
     "express": "^4.11.1",
+    "body-parser": "^1.10.2",
     "socket.io": "*",
     "mongoose" : "~3.8.0"
   },

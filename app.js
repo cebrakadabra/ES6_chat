@@ -8,7 +8,12 @@
 var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
-    io = require('socket.io').listen(server);
+    io = require('socket.io').listen(server),
+    bodyParser = require( "body-parser" );
+
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // import and bind api
 var api = require("./api");
@@ -24,7 +29,7 @@ app.use('/partials', express.static(__dirname + '/dist/partials'));
 
 // routing
 app.get('/', function (req, res) {
-    res.sendfile(__dirname + '/dist/index.html');
+    res.sendFile(__dirname + '/dist/index.html');
 });
 
 
@@ -42,7 +47,7 @@ var usernames = {};
 // rooms which are currently available in chat
 var rooms = ['Österreich','Salzburg','Wien'];
 
-// var rooms  = array();
+// via api
 
 
 

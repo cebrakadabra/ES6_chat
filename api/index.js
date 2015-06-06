@@ -10,10 +10,5 @@ var user = require("./user");
 router.use("/api/room", room);
 router.use("/api/user", user);
 
-// default route
-// router.all("*", function(req, res) {
-//     console.log("Route not found: ", req.url);
-//     res.render("index");
-// });
 
 module.exports = router;

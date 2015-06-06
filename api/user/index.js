@@ -25,18 +25,18 @@ urlRoot.get( function(req, res ) {
 urlRoot.post( function(req, res) {
   //new user
 
-  console.log(req);
-  console.log(res);
-
-
-  var user = new User();
-  user.name = req.body.name;
-  user.inRoom = req.body.inRoom; //room name
+  var user = new User({
+    name: req.body.name,
+  });
 
   user.save( function(err) {
       if (err) {
-          console.log("cannot create new user ", err);
-          res.send(err);
+        if ( err.code === 11000 || err.code === 84 ) {
+            res.status(500).send( {"error": "user allready exists"} );
+        } else {
+            console.log( "error while creating user ", err );
+            res.status(500).send( err );
+        }
       } else {
           res.status(200).end();
       }
@@ -44,7 +44,20 @@ urlRoot.post( function(req, res) {
 });
 
 
+var urlName = router.route( "/:name" );
+
 //delete user
+urlName.delete( function( req, res ) {
+  //req.params.name
+
+  User.findOne( {name: req.params.name} ).remove( function(err) {
+        if ( err ) {
+            console.log("wasn't able to remove User ", err);
+        } else {
+            res.status( 200 ).end();
+        }
+    });
+});
 
 
 module.exports = router;

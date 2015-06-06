@@ -14,7 +14,11 @@ angular.module('chatapp.controller', [])
 		$scope.users = UserService.get();
 		console.log($scope.users);
 
-		// UserService.create({name: 'Salzburg from angular!!'});
+		//delete a user
+		UserService.delete("berni"); //with username (is unique)
+
+		RoomService.create({name: 'Salzburg from angular!!2'});
+		UserService.create({name: 'chris2'});
 
 
 

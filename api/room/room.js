@@ -9,11 +9,7 @@ var roomSchema = mongoose.Schema({
     type: String,
     index: true,
     unique: true
-  },
-  users: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }],
+  }
 });
 
 module.exports = {

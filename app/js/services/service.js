@@ -15,22 +15,15 @@ angular.module('chatapp.services', [])
 			      url: '/api/room'
 			    })
 			    .success(function(data, status, headers, config) {
-			      console.log("success");
-			      console.log(status);
-			      console.log(data);
-
 			      var rooms = data;
 
 			      for(var i = 0; i < rooms.length; i++){
 			        data_array.push(rooms[i]);
 			      }
-
-
 			    })
 			    .error(function(data, status, headers, config) {
 			      console.log("error");
 			      console.log(status);
-			      console.log(headers);
 			    });
 
 					return {
@@ -40,6 +33,7 @@ angular.module('chatapp.services', [])
 
         // call to POST and create a new room
         create : function(roomData) {
+						console.log(roomData);
             return $http.post('/api/room', roomData);
         },
 
@@ -62,22 +56,15 @@ angular.module('chatapp.services', [])
 				      url: '/api/user'
 				    })
 				    .success(function(data, status, headers, config) {
-				      console.log("success");
-				      console.log(status);
-				      console.log(data);
-
 				      var rooms = data;
 
 				      for(var i = 0; i < rooms.length; i++){
 				        data_array.push(rooms[i]);
 				      }
-
-
 				    })
 				    .error(function(data, status, headers, config) {
 				      console.log("error");
 				      console.log(status);
-				      console.log(headers);
 				    });
 
 						return {
@@ -87,12 +74,13 @@ angular.module('chatapp.services', [])
 
 				// call to POST and create a new user
 				create : function(userData) {
+						console.log(userData);
 						return $http.post('/api/user', userData);
 				},
 
 				// call to DELETE a user
-				delete : function(id) {
-						return $http.delete('/api/user/' + id);
+				delete : function(name) {
+						return $http.delete('/api/user/' + name);
 				}
 		};
 	}]);

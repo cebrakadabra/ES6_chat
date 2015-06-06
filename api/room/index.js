@@ -27,13 +27,18 @@ urlRoot.get( function( req, res ) {
 urlRoot.post( function( req, res) {
   //new room
 
-  var room = new Room();
-  room.name = req.body.name;
+  var room = new Room({
+    name: req.body.name,
+  });
 
   room.save( function(err) {
       if (err) {
-          console.log("cannot create new room ", err);
-          res.send(err);
+        if ( err.code === 11000 || err.code === 84 ) {
+            res.status(500).send( {"error": "room allready exists"} );
+        } else {
+            console.log( "error while creating room ", err );
+            res.status(500).send( err );
+        }
       } else {
           res.status(200).end();
       }
