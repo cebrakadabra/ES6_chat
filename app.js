@@ -27,6 +27,7 @@ var port = process.env.PORT || 1337;
 app.use(express.static(__dirname + '/dist/public'));
 app.use('/partials', express.static(__dirname + '/dist/partials'));
 app.use('/fonts', express.static(__dirname + '/dist/fonts'));
+app.use('/images', express.static(__dirname + '/dist/images'));
 
 // routing
 app.get('/', function (req, res) {

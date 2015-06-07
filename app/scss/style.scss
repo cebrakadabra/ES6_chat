@@ -17,3 +17,11 @@ body {
 .white{
   color: $primary-color;
 }
+
+.custom-link{
+  color: $primary-color;
+}
+
+.custom-link:hover{
+  text-decoration: none;
+}

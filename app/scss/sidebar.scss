@@ -1,4 +1,5 @@
 $third-background-color: #1F8EE5;
+$icon-bg-color: #114F7F;
 
 .sidebar{
   position: absolute;
@@ -10,13 +11,35 @@ $third-background-color: #1F8EE5;
   background: $third-background-color;
 }
 
-.sidebaricon{
+.firstsidebaricon{
   width: 35px;
   height: 35px;
-  background: #114F7F;
+  background: $icon-bg-color;
   font-size: 18px;
 }
 
-.iconself{
+.sidebaricon{
+  width: 35px;
+  height: 35px;
+  font-size: 18px;
+  background: transparent;
+}
+
+.sidebaricon:hover{
+  cursor: pointer;
+  background: $icon-bg-color;
+}
+
+.sidebariconbottom{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.firsticonself{
   padding: 7px;
+}
+
+.iconself{
+  padding: 9px;
 }
