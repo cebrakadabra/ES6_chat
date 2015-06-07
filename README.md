@@ -33,7 +33,7 @@ or if you are a lazy reader:
 
 ## Components
 ####Frontend
-BackboneJS - ES6 used
+AngularJS - ES6 used
 Babel (for ES6 transcript)
 lodash
 jQuery
