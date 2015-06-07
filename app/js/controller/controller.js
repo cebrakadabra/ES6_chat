@@ -155,9 +155,9 @@ angular.module('chatapp.controller', [])
 	}])
 
 
-	.controller('RoomController', ['$scope', '$sce', '$location', '$anchorScroll', '$interval', '$timeout', 'ResultService', 'RoomService', 'UserService', function ($scope, $sce, $location, $anchorScroll, $interval, $timeout, ResultService, RoomService, UserService) {
+	.controller('RoomController', ['$scope', '$sce', '$location', '$anchorScroll', '$interval', '$timeout', 'RoomService', 'UserService', function ($scope, $sce, $location, $anchorScroll, $interval, $timeout, RoomService, UserService) {
 
-
+		
 
 
 

@@ -74,7 +74,7 @@ grunt.initConfig({
     watch: {
       html: {
         files: ['app/index.html','app/partials/*.html'],
-        tasks: ['copy'],
+        tasks: ['browserify', 'copy'],
         options: {
           livereload: true
         }

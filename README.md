@@ -2,20 +2,28 @@
 
 ## Installation instructions
 
-Simply clone it and run:
+### Simply clone it and run:
 
-get dependencies:
+#### get dependencies:
 ```$ npm install```
 
 
-Install mongoDB Server:
+#### Install mongoDB Server:
 http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
 
+or if you are a lazy reader:
+```brew update```
+```brew install mongodb```
 
-build stuff:
+#### setup database and run mongodb server
+```sudo mkdir -p /data/db```
+```sudo mongod```
+
+
+#### build stuff:
 ```$ grunt ```
 
-run app:
+#### run app:
 ```$ mongod ```
 ```$ npm start ```
 
@@ -25,6 +33,7 @@ BackboneJS - ES6 used
 Babel (for ES6 transcript)
 lodash
 jQuery
+less / scss
 
 ####Backend
 nodeJS

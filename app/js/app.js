@@ -25,16 +25,16 @@ chatapp.config(function($logProvider){
 chatapp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/home', {
+      when('/chat', {
         templateUrl: 'partials/main.html',
 				controller: 'HomeController'
       }).
-			when('/room', {
+			when('/rooms', {
         templateUrl: 'partials/room.html',
 				controller: 'RoomController'
       }).
       otherwise({
-        redirectTo: '/home'
+        redirectTo: '/rooms'
       });
   }]);
 
