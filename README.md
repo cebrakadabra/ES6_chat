@@ -19,9 +19,13 @@ or if you are a lazy reader:
 ```sudo mkdir -p /data/db```
 ```sudo mongod```
 
+#### install sass
+```gem install sass```
 
 #### build stuff:
-```$ grunt ```
+```$ grunt ``` grunt default stack runs same as grunt prod
+```$ grunt dev ``` for watching on files continiously
+```$ grunt prod ``` for production build
 
 #### run app:
 ```$ mongod ```

@@ -34,7 +34,14 @@ grunt.initConfig({
       },
       target: {
         files: {
-          'dist/public/css/build.css': ['app/css/*.css']
+          'dist/public/css/build.min.css': ['dist/public/css/build.css']
+        }
+      }
+    },
+    sass: {
+      dist: {
+        files: {
+          'dist/public/css/build.css': ['app/css/*.scss']
         }
       }
     },
@@ -74,28 +81,28 @@ grunt.initConfig({
     watch: {
       html: {
         files: ['app/index.html','app/partials/*.html'],
-        tasks: ['browserify', 'copy'],
+        tasks: ['copy'],
         options: {
           livereload: true
         }
       },
       css: {
-        files: ['app/css/*.css'],
-        tasks: ['cssmin'],
+        files: ['app/css/*.scss'],
+        tasks: ['sass', 'cssmin'],
         options: {
           livereload: true
         }
       },
       js: {
         files: ['<%= jshint.files %>'],
-        tasks: ['jshint']
+        tasks: ['jshint', 'browserify']
       }
     }
 });
 
 // register Grunt tasks
-grunt.registerTask('default', ['browserify', 'babel', 'cssmin', 'copy', 'jshint']);
-grunt.registerTask('dev', ['browserify', 'babel', 'cssmin', 'copy', 'jshint', 'watch']);
-grunt.registerTask('prod', ['browserify', 'babel', 'cssmin', 'copy', 'jshint']);
+grunt.registerTask('default', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint']);
+grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'watch']);
+grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint']);
 
 };
