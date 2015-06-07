@@ -45,9 +45,9 @@ grunt.initConfig({
         // }
         files: [{
           expand: true,
-          cwd: 'app',
-          src: ['css/*.scss'],
-          dest: 'app/',
+          cwd: 'app/scss',
+          src: ['*.scss'],
+          dest: 'app/css',
           ext: '.css'
         }]
       }

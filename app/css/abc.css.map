@@ -1,7 +1,7 @@
 {
 "version": 3,
 "mappings": "AAAA,cAAc;EACZ,KAAK,EAAE,IAAI",
-"sources": ["abc.scss"],
+"sources": ["../scss/abc.scss"],
 "names": [],
 "file": "abc.css"
 }
