@@ -1,4 +1,6 @@
 # ES6-chat
+A simple chat application using a full development stack with ECMAScript6 inside.
+
 
 ## Installation instructions
 
@@ -36,6 +38,8 @@ or if you are a lazy reader:
 ```$ mongod ```
 
 ```$ npm start ```
+
+
 
 ## Components
 ####Frontend
