@@ -10,7 +10,7 @@ grunt.initConfig({
         },
         dist: {
             files: {
-                'dist/public/js/transcriptedapp.js': 'dist/public/js/build.js'
+                'dist/public/js/transcriptedbuild.js': 'dist/public/js/build.js'
             }
         }
     },
@@ -34,15 +34,22 @@ grunt.initConfig({
       },
       target: {
         files: {
-          'dist/public/css/build.min.css': ['dist/public/css/build.css']
+          'dist/public/css/build.min.css': ['app/css/*.css']
         }
       }
     },
     sass: {
       dist: {
-        files: {
-          'dist/public/css/build.css': ['app/css/*.scss']
-        }
+        // files: {
+        //   'dist/public/css/build.css': ['app/css/*.scss']
+        // }
+        files: [{
+          expand: true,
+          cwd: 'app',
+          src: ['css/*.scss'],
+          dest: 'app/',
+          ext: '.css'
+        }]
       }
     },
     copy: {
