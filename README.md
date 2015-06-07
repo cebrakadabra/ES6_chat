@@ -39,29 +39,21 @@ or if you are a lazy reader:
 
 ## Components
 ####Frontend
-AngularJS - ES6 used
-
-Babel (for ES6 transcript)
-
-lodash
-
-jQuery
-
-less / scss
+* AngularJS - ES6 used
+* Babel (for ES6 transcript)
+* lodash
+* jQuery
+* less / scss
 
 ####Backend
-nodeJS
-
-MongoDB
-
-socket.io
-
-express
+* nodeJS
+* MongoDB
+* socket.io
+* express
 
 ####Doku
-doccoo
-
-/doc directory
+* doccoo
+* /doc directory
 
 ####Code Coverage
-Istanbul
+* Istanbul
