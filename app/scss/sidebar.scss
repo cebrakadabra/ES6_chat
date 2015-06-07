@@ -1,0 +1,22 @@
+$third-background-color: #1F8EE5;
+
+.sidebar{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 35px;
+  height: 100vh;
+  background: $third-background-color;
+}
+
+.sidebaricon{
+  width: 35px;
+  height: 35px;
+  background: #114F7F;
+  font-size: 18px;
+}
+
+.iconself{
+  padding: 7px;
+}

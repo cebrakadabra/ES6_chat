@@ -94,7 +94,7 @@ grunt.initConfig({
         }
       },
       css: {
-        files: ['app/css/*.scss'],
+        files: ['app/scss/*.scss'],
         tasks: ['sass', 'cssmin'],
         options: {
           livereload: true

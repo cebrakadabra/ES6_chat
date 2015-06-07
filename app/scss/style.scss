@@ -1,10 +1,19 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-color: #fff;
 $primary-background-color: #092740;
+$secondary-background-color: #0C3759;
 
 body {
   font: 100% $font-stack;
   font-weight: 200;
   color: $primary-color;
   background: $primary-background-color;
+}
+
+.center{
+  text-align: center;
+}
+
+.white{
+  color: $primary-color;
 }

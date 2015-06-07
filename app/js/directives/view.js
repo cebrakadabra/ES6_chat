@@ -1,7 +1,7 @@
 angular.module('chatapp.directives', [])
 
-	.directive('customDirective', function() {
+	.directive('sidebarDirective', function() {
 	    return {
-					templateUrl: 'partials/abc.html'
+					templateUrl: 'partials/sidebar.html'
 	    };
 	});
