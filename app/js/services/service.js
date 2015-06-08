@@ -73,9 +73,24 @@ angular.module('chatapp.services', [])
 				},
 
 				// call to POST and create a new user
-				create : function(userData) {
-						console.log(userData);
-						return $http.post('/api/user', userData);
+				create : function(userData, callback) {
+
+						var test = $http({
+							method: 'POST',
+							url: '/api/user',
+							data: userData
+							})
+						.success(function(data, status, headers, config) {
+							console.log(status);
+							// bool.value = true;
+							callback(true, userData.name);
+						})
+						.error(function(data, status, headers, config) {
+							console.log(status);
+							// bool.value = false;
+							callback(false, null);
+						});
+
 				},
 
 				// call to DELETE a user

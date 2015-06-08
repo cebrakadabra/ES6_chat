@@ -1,4 +1,14 @@
-<div sidebar-Directive></div>
 <div class="roomcontainerhead">
   <p class="center white">Select Room</p>
+</div>
+<div class="chatEntryPanel">
+  <div class="selectUsername">
+    <form>
+      <input type="text" placeholder="Insert username" class="inputuser" ng-model="username">
+      <button class="submitUser" ng-click="setUser(username)">OK</button>
+    </form>
+  </div>
+  <div class="rooms">
+    <button class="room" ng-repeat="room in rooms">{{room}}</button>
+  </div>
 </div>

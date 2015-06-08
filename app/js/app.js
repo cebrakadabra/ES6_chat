@@ -26,8 +26,8 @@ chatapp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/chat', {
-        templateUrl: 'partials/main.html',
-				controller: 'HomeController'
+        templateUrl: 'partials/chat.html',
+				controller: 'ChatController'
       }).
 			when('/rooms', {
         templateUrl: 'partials/room.html',

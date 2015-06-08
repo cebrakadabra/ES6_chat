@@ -64,7 +64,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	// when the client emits 'adduser', this listens and executes
-	socket.on('adduser', function(username){
+	socket.on('adduser', function(username, roomName){
 
 		if (username === "") {
 		    // user pressed OK, but the input field was empty
@@ -75,18 +75,18 @@ io.sockets.on('connection', function (socket) {
 		    // we store the username in the socket session for this client
 			socket.username = username;
 			// store the room name in the socket session for this client
-			//socket.room = 'Österreich';
-      socket.room = rooms[0];
+			//socket.room = selected Room from UI
+      socket.room = roomName;
 
 			// add the client's username to the global list
 			usernames[username] = username;
 			// send client to room 1
-			socket.join(rooms[0]);
+			socket.join(roomName);
 			// echo to client they've connected
 			socket.emit('updatechat', 'SERVER', 'you have connected');
 			// echo globally (all clients) that a person has connected
-			socket.broadcast.to(rooms[0]).emit('updatechat', 'SERVER', username + ' has connected');
-			socket.emit('updaterooms', rooms, rooms[0]);
+			socket.broadcast.to(roomName).emit('updatechat', 'SERVER', username + ' has connected');
+			socket.emit('updaterooms', rooms, roomName);
 			// update the list of users in chat, client-side
 			io.sockets.emit('updateusers', usernames, socket.room);
 

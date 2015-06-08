@@ -1,0 +1,16 @@
+$bg-color: #114F7F;
+
+.namesection{
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 150px;
+  width: auto;
+  height: 35px;
+  background: $bg-color;
+}
+
+.username{
+  margin: 0;
+  padding: 8px;
+}

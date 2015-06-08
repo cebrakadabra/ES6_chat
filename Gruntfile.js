@@ -102,7 +102,7 @@ grunt.initConfig({
       },
       js: {
         files: ['<%= jshint.files %>'],
-        tasks: ['jshint', 'browserify']
+        tasks: ['jshint', 'browserify', 'babel']
       }
     }
 });
