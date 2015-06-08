@@ -4,27 +4,16 @@ angular.module('chatapp.controller', [])
  */
 	.controller('MainCtrl', ['$scope', '$location', '$anchorScroll', '$interval', '$timeout', 'RoomService', 'UserService', function ($scope, $location, $anchorScroll, $interval, $timeout, RoomService, UserService) {
 
-
-		//EXAMPLE
-
-		//Use Roomservice to call the api that calls mongoose that calls mongodb ;)
-		$scope.rooms = RoomService.get();
-		console.log($scope.rooms);
-
 		$scope.users = UserService.get();
 		console.log($scope.users);
 
 		//delete a user
 		UserService.delete("berni"); //with username (is unique)
-
-
-		// Create first 5 Rooms
-		RoomService.create({name: 'Salzburg'});
-		RoomService.create({name: 'Bayern'});
-		RoomService.create({name: 'Wien'});
-		RoomService.create({name: 'Tirol'});
-		RoomService.create({name: 'Burgenland'});
 		// UserService.create({name: 'chris4'});
+
+		//Use Roomservice to call the api that calls mongoose that calls mongodb ;)
+		$scope.rooms = RoomService.get();
+		console.log($scope.rooms);
 
 		$scope.newUser = {
 			name: null,
@@ -195,7 +184,8 @@ angular.module('chatapp.controller', [])
 			if(param){
 				console.log("User fine");
 				$scope.newUser.name = username;
-				console.log($scope.newUser.name);
+
+
 			} else{
 				console.log("User already exists");
 			}

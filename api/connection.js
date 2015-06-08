@@ -33,22 +33,43 @@ connection.on("disconnected", function() {
 
 connection.on("open", function() {
     console.log("Connection to database successful!");
+
+
+    var roomarray = [{name: "Salzburg"}, {name: "Bayern"}, {name: "Wien"}, {name: "Tirol"}, {name: "Burgenland"}];
     connection.db.collectionNames(function (err, names) {
         // names contains an array of objects that contain the collection names
 
         for(var i = 0; i < names.length; i++){
           if(names[i].name === 'users'){
             connection.collections['users'].drop( function(err) {
-                console.log('users collection dropped');
+              console.log("\n$ *** USERS SETUP *** $");
+                console.log('- Old users collection dropped');
             });
           }
-          if(names[i].name === 'rooms'){
+          else if(names[i].name === 'rooms'){
             connection.collections['rooms'].drop( function(err) {
-                console.log('rooms collection dropped');
+                console.log("\n$ *** ROOMS SETUP *** $");
+                console.log('- Old rooms collection dropped');
+                connection.collection('rooms').insert(roomarray, onInsert);
             });
+          } else{
+            connection.collection('rooms').insert(roomarray, onInsert);
           }
         }
     });
+
+
+
+
+
+    function onInsert(err, docs) {
+        if (err) {
+            // TODO: handle error
+        } else {
+            console.log("- Insert initial rooms");
+            console.info('- %d rooms were successfully added as default.', docs.length);
+        }
+    }
 });
 
 module.exports = connection;

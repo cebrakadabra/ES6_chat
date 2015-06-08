@@ -37,6 +37,7 @@ app.get('/', function (req, res) {
 
 // let server listen on port
 server.listen(port);
+console.log("\n$ *** SERVER SETUP *** $");
 console.log("Magic happens on localhost:"+port);
 // expose app
 exports = module.exports = app;

@@ -14,7 +14,7 @@ urlRoot.get( function( req, res ) {
             console.log( "cannot get Rooms", err );
             res.send( err );
         } else {
-            console.log(rooms);
+            // console.log(rooms);
             if ( rooms === null ) {
                 rooms = [];
             }
