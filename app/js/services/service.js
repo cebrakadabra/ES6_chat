@@ -4,44 +4,50 @@ angular.module('chatapp.services', [])
  */
 
 	.factory('RoomService', ['$interval', '$filter', '$http',  function($interval, $filter, $http){
+
+		var rooms = {
+			data: null
+		};
+
+		var roomdata = [];
+
+		// call to get all rooms
+		var getRooms = function getRooms(){
+			$http({
+				method: 'GET',
+				url: '/api/room'
+			})
+			.success(function(data, status, headers, config) {
+				rooms.data = data;
+				for(var i = 0; i < rooms.data.length; i++){
+					console.log(rooms.data[i].name);
+					roomdata.push(rooms.data[i].name);
+				}
+			})
+			.error(function(data, status, headers, config) {
+				console.log("error");
+				console.log(status);
+			});
+		};
+
+
+		// call to POST and create a new room
+		var createRoom = function createRoom(roomName){
+			console.log(roomName);
+			return $http.post('/api/room', roomName);
+		};
+
+		var deleteRoom = function deleteRoom(id){
+			return $http.delete('/api/room/' + id);
+		};
+
 		return {
-        // call to get all rooms
-        get : function() {
-
-					var data_array = [];
-
-					$http({
-			      method: 'GET',
-			      url: '/api/room'
-			    })
-			    .success(function(data, status, headers, config) {
-			      var rooms = data;
-
-			      for(var i = 0; i < rooms.length; i++){
-			        data_array.push(rooms[i]);
-			      }
-			    })
-			    .error(function(data, status, headers, config) {
-			      console.log("error");
-			      console.log(status);
-			    });
-
-					return {
-						data_array: data_array
-					};
-        },
-
-        // call to POST and create a new room
-        create : function(roomData) {
-						console.log(roomData);
-            return $http.post('/api/room', roomData);
-        },
-
-        // call to DELETE a room
-        delete : function(id) {
-            return $http.delete('/api/room/' + id);
-        }
+				getRooms : getRooms,
+				createRoom: createRoom,
+				deleteRoom: deleteRoom,
+				roomdata: roomdata
     };
+
 	}])
 
 	.factory('UserService', ['$interval', '$filter', '$http',  function($interval, $filter, $http){

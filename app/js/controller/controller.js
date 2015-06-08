@@ -12,8 +12,10 @@ angular.module('chatapp.controller', [])
 		// UserService.create({name: 'chris4'});
 
 		//Use Roomservice to call the api that calls mongoose that calls mongodb ;)
-		$scope.rooms = RoomService.get();
-		console.log($scope.rooms);
+		$scope.roomservice = RoomService;
+		$scope.roomservice.getRooms();
+		$scope.rooms = $scope.roomservice.roomdata;
+
 
 		$scope.newUser = {
 			name: null,
@@ -174,9 +176,10 @@ angular.module('chatapp.controller', [])
 
 
 	.controller('RoomController', ['$scope', '$sce', '$location', '$anchorScroll', '$interval', '$timeout', 'RoomService', 'UserService', function ($scope, $sce, $location, $anchorScroll, $interval, $timeout, RoomService, UserService) {
-		//Use Roomservice to call the api that calls mongoose that calls mongodb ;)
-		$scope.rooms = RoomService.get();
-		console.log($scope.rooms);
+		// //Use Roomservice to call the api that calls mongoose that calls mongodb ;)
+		// $scope.rooms = RoomService.get();
+		// console.log($scope.rooms);
+
 
 
 		// User callback, checks on existance of current user
