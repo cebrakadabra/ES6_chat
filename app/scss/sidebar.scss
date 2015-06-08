@@ -61,8 +61,11 @@ $icon-bg-color: #114F7F;
   min-height: 200px;
   background: $icon-bg-color;
   position: absolute;
-  /* top: 70px; */
-  top: 300px;
+  top: 70px;
   left: 37px;
-  display: none;
+  display: block;
+}
+
+.padder{
+  padding: 10px;
 }

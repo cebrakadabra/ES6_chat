@@ -22,6 +22,9 @@ angular.module('chatapp.controller', [])
 		  $location.path( path );
 		};
 
+		$scope.users = [];
+		$scope.currentroom = null;
+		$scope.roomlist = [];
 
 
 
@@ -87,9 +90,13 @@ angular.module('chatapp.controller', [])
 
 		// listener, whenever the server emits 'updateusers', this updates the username list
 		$scope.socket.on('updateusers', function(data, room) {
-			$('#users').empty();
+			// $('#users').empty();
+			$scope.users = [];
 			$.each(data, function(key, value) {
-				$('#users').append('<div class="user"><strong>' + key + '</strong> in ' + room + '</div>');
+				// $('#users').append('<div class="user"><strong>' + key + '</strong> in ' + room + '</div>');
+				$scope.$apply(function(){
+					$scope.users.push({name: key, room: room});
+				});
 
 			});
 		});
@@ -100,13 +107,21 @@ angular.module('chatapp.controller', [])
 
 		// listener, whenever the server emits 'updaterooms', this updates the room the client is in
 		$scope.socket.on('updaterooms', function(rooms, current_room) {
-			$('#rooms').empty();
+			// $('#rooms').empty();
+			$scope.roomlist = [];
 			$.each(rooms, function(key, value) {
 				if(value == current_room){
-					$('#rooms').append('<div>' + value + '</div>');
+					// $('#rooms').append('<div>' + value + '</div>');
+					$scope.$apply(function(){
+						$scope.currentroom = null;
+						$scope.currentroom = value;
+					});
 				}
 				else {
-					$('#rooms').append('<div><a href="#" ng-click="switchRoom(\''+value+'\')">' + value + '</a></div>');
+					// $('#rooms').append('<div><a href="#" ng-click="switchRoom(\''+value+'\')">' + value + '</a></div>');
+					$scope.$apply(function(){
+						$scope.roomlist.push(value);
+					});
 				}
 			});
 		});

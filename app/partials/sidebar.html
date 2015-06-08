@@ -16,9 +16,13 @@
 </div>
 
 <div class="userfield">
-  <b style="color: #444; font-family: Verdana; font-size: 12px;">USERS</b>
-  <hr>
-  <div id="users"></div>
+  <div class="padder">
+    <p class="nomargin">Users online:</p>
+  </div>
+  <div class="padder">
+    <!-- <div id="users"></div> -->
+    <p ng-repeat="user in users">{{user.name}}<br><small>in {{user.room}}</small></p>
+  </div>
 </div>
 
 <div class="roomfield">
@@ -28,5 +32,9 @@
   </form>
   <br>
   <br>
+  <div class="padder">
+    <p>current room: {{currentroom}}</p>
+    <p ng-repeat="room in roomlist" ng-click="switchRoom(room)">{{room}}</p>
+  </div>
   <div id="rooms"></div>
 </div>
