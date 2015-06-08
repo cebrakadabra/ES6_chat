@@ -187,15 +187,23 @@ angular.module('chatapp.controller', [])
 			if(param){
 				console.log("User fine");
 				$scope.newUser.name = username;
-
+				$(".rooms").fadeIn();
 
 			} else{
 				console.log("User already exists");
+				$(".usererror").fadeIn();
+				$timeout(function(){
+					$(".usererror").fadeOut();
+				}, 2500);
 			}
 		};
 
 		$scope.setUser = function(username){
 			UserService.create({name: username}, $scope.checkUser);
+		};
+
+		$scope.selectRoom = function(room){
+			$scope.newUser.room = room;
 		};
 
 

@@ -1,7 +1,36 @@
 $font-stack:    Helvetica, sans-serif;
 $primary-background-color: #114F7F;
 $secondary-background-color: #0C3759;
+$third-background-color: #229EFF;
 $font-color: #fff;
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+@mixin scale($value) {
+  -webkit-transform: scale($value);
+  -moz-transform: scale($value);
+  -ms-transform: scale($value);
+  -o-transform: scale($value);
+  transform: scale($value);
+}
+
+@mixin transition($ms, $who, $animation) {
+  -webkit-transition: $ms $who $animation;
+  -moz-transition: $ms $who $animation;
+  -ms-transition: $ms $who $animation;
+  -o-transition: $ms $who $animation;
+  transition: $ms $who $animation;
+}
 
 .roomcontainerhead{
   width: 100%;
@@ -13,7 +42,6 @@ $font-color: #fff;
 }
 
 .chatEntryPanel{
-  background: $primary-background-color;
   width: 500px;
   margin-left: auto;
   margin-right: auto;
@@ -56,6 +84,50 @@ $font-color: #fff;
 }
 
 .rooms{
-  display: block;
+  display: none;
   min-height: 200px;
+}
+
+.room{
+  width: 100%;
+  height: 35px;
+  background: $primary-background-color;
+  border: none;
+  margin-top: 10px;
+  color: $font-color;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.room:hover{
+  background: $third-background-color;
+  cursor: pointer;
+  @include transition(250ms, all, ease);
+  @include scale(1.1);
+}
+
+.usererror{
+  width: 100%;
+  height: 30px;
+  color: $font-color;
+  text-align: center;
+  background: #df3c3c;
+  font-size: 13px;
+  display: none;
+}
+
+.nomargin{
+  margin: 0;
+}
+
+.pad{
+  padding-top: 6px;
+}
+
+*:focus {
+    outline: 0;
+}
+
+.fontweightthin{
+  font-weight: 100;
 }
