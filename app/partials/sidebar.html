@@ -14,3 +14,19 @@
     </div>
   </a>
 </div>
+
+<div class="userfield">
+  <b style="color: #444; font-family: Verdana; font-size: 12px;">USERS</b>
+  <hr>
+  <div id="users"></div>
+</div>
+
+<div class="roomfield">
+  <form>
+    <input type="text" placeholder="Create a new room" id="newroominput" ng-model="newroom" ng-enter="createNewRoom(newroom)">
+    <input type="button" id="createnewroom" ng-click="createNewRoom(newroom)" value="Create">
+  </form>
+  <br>
+  <br>
+  <div id="rooms"></div>
+</div>

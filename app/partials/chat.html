@@ -2,32 +2,15 @@
 <div class="namesection">
 	<p class="white username">Welcome, <span id="name">{{username}}</span></p>
 </div>
-<!-- LEFT BAR -->
-	<div style="width: 15%; height: 90%; border-right: 1px solid #ccc; padding: 10px; background-color: #ededed; float: left;">
-		<b style="color: #444; font-family: Verdana;" >Ö3 Chat</b>
-		<hr>
-		<br>
-		<b style="color: #444; font-family: Verdana; font-size: 12px;">ROOMS</b>
-		<hr>
-		<input type="text" placeholder="Type in new Room" id="newroominput"><input type="button" id="createnewroom" value="OK">
-		<br>
-		<br>
-		<div id="rooms"></div>
-		<br>
-		<b style="color: #444; font-family: Verdana; font-size: 12px;">USERS</b>
-		<hr>
-		<div id="users"></div>
-	</div>
 
 	<!-- CHAT BAR-->
-		<div style="float: left; width: 80%; height: 90%; overflow: hidden;">
-			<div id="conversation" style=" height: 700px; padding-left: 5px; overflow: scroll; font-family: Verdana; font-size: 12px;">
+		<div class="chatting">
+			<div id="conversation" scroll-glue>
 				<br>
 			</div>
 		</div>
 
 	<!-- TYPE IN BAR -->
-		<div style="position: absolute; z-index: 3; float: left; min-height: 100px; padding: 10px; width: 98.5%; bottom: 0; left: 0; background-color: #ededed; border-top: 1px solid #ccc; font-family: Verdana;">
-			<textarea id="data" style="width: 90%; height: 80px;"></textarea>
-			<input type="button" id="datasend" value="send" style="padding: 5px; border: none; width: 8%; float: right; bottom: 30; position: absolute; right: 30; padding-top: 30px; padding-bottom: 30px; font-size: 15px; background-color: #3694FF;">
+		<div class="chattingbox">
+			<textarea id="data" class="textareabox" ng-model="message" ng-Enter="sendMessage(message)" placeholder="Type to chat and send with return ..."></textarea>
 		</div>

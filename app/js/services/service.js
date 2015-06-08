@@ -20,7 +20,6 @@ angular.module('chatapp.services', [])
 			.success(function(data, status, headers, config) {
 				rooms.data = data;
 				for(var i = 0; i < rooms.data.length; i++){
-					console.log(rooms.data[i].name);
 					roomdata.push(rooms.data[i].name);
 				}
 			})

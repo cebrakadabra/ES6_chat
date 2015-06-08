@@ -1,3 +1,4 @@
+"use strict";
 /*
 	****************************************
 	Chat Backend
@@ -9,15 +10,15 @@ var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     io = require('socket.io').listen(server),
-    bodyParser = require( "body-parser" );
-
+    bodyParser = require( "body-parser" ),
+    mongoose = require( "mongoose" );
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // import and bind api
 var api = require("./api");
-app.use( api );
+app.use(api);
 
 
 // set our port
@@ -39,24 +40,47 @@ app.get('/', function (req, res) {
 server.listen(port);
 console.log("\n$ *** SERVER SETUP *** $");
 console.log("Magic happens on localhost:"+port);
+
+// rooms which are currently available in chat
+// var rooms = ['Österreich','Salzburg','Wien'];
+
 // expose app
 exports = module.exports = app;
 
 
 
 // usernames which are currently connected to the chat
-var usernames = {};
-
-// rooms which are currently available in chat
-var rooms = ['Österreich','Salzburg','Wien'];
-
-// via api
 
 
 
 
 
 io.sockets.on('connection', function (socket) {
+
+  var usernames = {};
+  var rooms = [];
+  var connection = null;
+
+  // connect to database
+  connection = mongoose.createConnection( 'mongodb://localhost/ES6chat2015CEBZ');
+
+  // get rooms from database
+  connection.on("open", function() {
+    // read rooms
+    var collection = connection.db.collection('rooms');
+    collection.find().toArray(function(err, roomNames) {
+        for(var i = 0; i < roomNames.length; i++){
+          rooms.push(roomNames[i].name);
+        }
+    });
+  });
+
+
+
+
+
+
+
 
 	// when the client emits 'sendchat', this listens and executes
 	socket.on('sendchat', function (data) {

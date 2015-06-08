@@ -1,4 +1,5 @@
 $bg-color: #114F7F;
+$font-stack:    Helvetica, sans-serif;
 
 .namesection{
   position: absolute;
@@ -8,9 +9,98 @@ $bg-color: #114F7F;
   width: auto;
   height: 35px;
   background: $bg-color;
+  z-index: 500;
 }
 
 .username{
   margin: 0;
   padding: 8px;
+}
+
+.chattingbox{
+  position: fixed;
+  width: 95%;
+  height: 80px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.textareabox{
+  width: 98%;
+  height: 60px;
+  border-radius: 5px;
+  resize: none;
+  padding: 10px;
+  font-size: 14px;
+  font-family: $font-stack;
+}
+
+.chatting{
+  width: 100%;
+  padding-left: 45px;
+  padding-right: 80px;
+  height: 88vh;
+  overflow: scroll;
+  font-size: 12px;
+}
+
+.chatleft{
+  width: 60%;
+  float: left;
+  text-align: left;
+}
+
+.chatright{
+  width: 60%;
+  float: right;
+  text-align: right;
+}
+
+.rightext{
+  padding-right: 60px;
+}
+
+.chatright:first-child{
+  margin-top: 50px;
+}
+
+.bubble{
+  max-width: 100%;
+  min-width: 30%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.bubbleleft{
+  background: #229EFF;
+  opacity: 0.6;
+  float: left;
+}
+
+.bubbleright{
+  background: #229EFF;
+  opacity: 0.8;
+  margin-right: 60px;
+  float: right;
+}
+
+.middle{
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
+}
+
+.middlebubble{
+  max-width: 50%;
+  background: rgba(255,255,255,0.6);
+  border-radius: 5px;
+  color: #555;
+  text-align: center;
+  padding: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
 }

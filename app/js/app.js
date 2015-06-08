@@ -14,6 +14,7 @@ var chatapp = angular.module('chatApp',
     'chatapp.controller',
 		'chatapp.services',
 		'chatapp.directives',
+		//'luegg.directives'
 
 	]);
 

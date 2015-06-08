@@ -13,8 +13,6 @@ var connectToDb = function() {
         }
     }
   });
-
-  //check for entries and populate initial rooms??
 }
 
 //connect to the db
@@ -57,9 +55,6 @@ connection.on("open", function() {
           }
         }
     });
-
-
-
 
 
     function onInsert(err, docs) {
