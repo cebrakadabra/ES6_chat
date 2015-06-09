@@ -86,14 +86,28 @@ grunt.initConfig({
       }
     },
     docco: {
-      debug: {
+      nodejs: {
         src: [
-          'app/js/**/*.js',
-          'api/**/*.js',
           'app.js'
         ],
         options: {
           output: 'docs/'
+        }
+      },
+      api: {
+        src: [
+          'api/**/*.js'
+        ],
+        options: {
+          output: 'docs/api/'
+        }
+      },
+      app: {
+        src: [
+          'app/js/**/*.js'
+        ],
+        options: {
+          output: 'docs/app'
         }
       }
     },
