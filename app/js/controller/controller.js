@@ -45,15 +45,23 @@ angular.module('chatapp.controller', [])
 		// on connection to server, ask for user's name with an anonymous callback
 		$scope.socket.on('connect', function(){
 
-			// $scope.socket.emit('adduser', $scope.newUser.name, $scope.newUser.room);
+			$scope.socket.emit('adduser', $scope.newUser.name, $scope.newUser.room);
 
+			// **************************
+			// **** DEV CONFIG ****
+			// **************************
 			// only for DEV -- user will be retrieved from window before then (Rooms, as well as romm itself)
-			var date = new Date();
-			var name = "Steve "+date;
-			$scope.$apply(function(){
-				$scope.newUser.name = name;
-			});
-			$scope.socket.emit('adduser', name, "Salzburg");
+
+			// var date = new Date();
+			// var name = "Steve "+date;
+			// $scope.$apply(function(){
+			// 	$scope.newUser.name = name;
+			// });
+			// $scope.socket.emit('adduser', name, "Salzburg");
+
+			// **************************
+			// **** DEV CONFIG END ****
+			// **************************
 
 		});
 
