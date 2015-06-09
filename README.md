@@ -13,7 +13,7 @@ A simple chat application using a full development stack with ECMAScript6 inside
 #### Install mongoDB Server:
 http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/
 
-or if you are a lazy reader:
+or if you are a lazy reader and you use mac:
 
 ```brew update```
 
