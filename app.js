@@ -50,14 +50,13 @@ exports = module.exports = app;
 
 
 // usernames which are currently connected to the chat
-
+var usernames = {};
 
 
 
 
 io.sockets.on('connection', function (socket) {
 
-  var usernames = {};
   var rooms = [];
   var connection = null;
 
@@ -114,6 +113,8 @@ io.sockets.on('connection', function (socket) {
 			socket.emit('updaterooms', rooms, roomName);
 			// update the list of users in chat, client-side
 			io.sockets.emit('updateusers', usernames, socket.room);
+
+      console.log(usernames);
 
 		} else {
 		    // user hit cancel

@@ -91,6 +91,7 @@ angular.module('chatapp.controller', [])
 		// listener, whenever the server emits 'updateusers', this updates the username list
 		$scope.socket.on('updateusers', function(data, room) {
 			// $('#users').empty();
+			console.log(data);
 			$scope.users = [];
 			$.each(data, function(key, value) {
 				// $('#users').append('<div class="user"><strong>' + key + '</strong> in ' + room + '</div>');
@@ -129,10 +130,20 @@ angular.module('chatapp.controller', [])
 		// listener, if a user switches the room, the view should be updated
 		$scope.socket.on('updateuserifRoomSwitched', function(user, room){
 
-			if($('.user:contains("'+user+'")').length > 0){
-				$('.user:contains("'+user+'")').remove();
-				$("#users").append('<div class="user"><strong>' + user + '</strong> in '+ room + '</div>');
+			// if($('.user:contains("'+user+'")').length > 0){
+			// 	$('.user:contains("'+user+'")').remove();
+			// 	$("#users").append('<div class="user"><strong>' + user + '</strong> in '+ room + '</div>');
+			// }
+
+			console.log(user, room);
+			var index;
+			for(var i = 0; i < $scope.users.length; i++){
+				if($scope.users[i].name === user){
+						index = i;
+				}
 			}
+			$scope.users[index].room = room;
+
 		});
 
 		// displaying the username on topleft
