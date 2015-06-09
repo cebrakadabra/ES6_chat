@@ -91,7 +91,7 @@ angular.module('chatapp.controller', [])
 		// listener, whenever the server emits 'updateusers', this updates the username list
 		$scope.socket.on('updateusers', function(data, room) {
 			// $('#users').empty();
-			console.log(data);
+			// console.log(data);
 			$scope.users = [];
 			$.each(data, function(key, value) {
 				// $('#users').append('<div class="user"><strong>' + key + '</strong> in ' + room + '</div>');
@@ -130,19 +130,15 @@ angular.module('chatapp.controller', [])
 		// listener, if a user switches the room, the view should be updated
 		$scope.socket.on('updateuserifRoomSwitched', function(user, room){
 
-			// if($('.user:contains("'+user+'")').length > 0){
-			// 	$('.user:contains("'+user+'")').remove();
-			// 	$("#users").append('<div class="user"><strong>' + user + '</strong> in '+ room + '</div>');
-			// }
-
-			console.log(user, room);
 			var index;
 			for(var i = 0; i < $scope.users.length; i++){
-				if($scope.users[i].name === user){
-						index = i;
+				if(user === $scope.users[i].name){
+					index = i;
 				}
 			}
-			$scope.users[index].room = room;
+			$scope.$apply(function(){
+				$scope.users[index].room = room;
+			});
 
 		});
 
@@ -163,67 +159,23 @@ angular.module('chatapp.controller', [])
 		};
 
 		$scope.sendMessage = function(message){
-			if(message !== ""){
+			if(message !== undefined && message !== ''){
 				$("#data").val('');
+				$scope.message = '';
 				$scope.socket.emit('sendchat', message);
 			}
 		};
 
-		// on load of page
-		// $(function(){
-			// when the client clicks SEND
-			// $('#datasend').click( function() {
-			// 	if($("#data").val() !== ""){
-			// 		var message = $('#data').val();
-			// 		$('#data').val('');
-			// 		// tell server to execute 'sendchat' and send along one parameter
-			// 		$scope.socket.emit('sendchat', message);
-			// 	}
-			// });
 
-			// when the client hits ENTER on their keyboard
-			// $('#data').keypress(function(e) {
-			// 	if(e.which == 13) {
-			// 		$(this).blur();
-			// 		if($("#data").val() !== ""){
-			// 			$('#datasend').focus().click();
-			// 		}
-			//
-			// 	}
-			// });
-
-			// click function for a new room
-			// $("#createnewroom").click(function(){
-			// 	if($("#newroominput").val() !== ""){
-			// 		var newRoomMember = $("#newroominput").val();
-			// 		$scope.socket.emit('createRoom', newRoomMember);
-			// 		$("#newroominput").val('');
-			// 	}
-			//
-			// });
 
 			$scope.createNewRoom = function(newroom){
-				if(newroom !== ""){
+				if(newroom !== undefined && newroom !== ''){
 					$scope.socket.emit('createRoom', newroom);
 					$("#newroominput").val('');
+					$scope.newroom = '';
 				}
 			};
 
-			// keypress function for creating a new room
-			// $("#newroominput").keypress(function(e) {
-			// 	if(e.which == 13) {
-			// 		$(this).blur();
-			// 		if($("#newroominput").val() !== ""){
-			// 			$('#createnewroom').focus().click();
-			// 		}
-			//
-			// 	}
-			// });
-
-
-
-
-		// });
 
 
 	}])

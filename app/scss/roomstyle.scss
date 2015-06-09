@@ -97,12 +97,12 @@ $font-color: #fff;
   color: $font-color;
   font-size: 18px;
   font-weight: 100;
+  @include transition(250ms, all, ease);
 }
 
 .room:hover{
   background: $third-background-color;
   cursor: pointer;
-  @include transition(250ms, all, ease);
   @include scale(1.1);
 }
 

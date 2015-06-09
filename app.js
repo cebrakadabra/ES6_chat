@@ -114,8 +114,6 @@ io.sockets.on('connection', function (socket) {
 			// update the list of users in chat, client-side
 			io.sockets.emit('updateusers', usernames, socket.room);
 
-      console.log(usernames);
-
 		} else {
 		    // user hit cancel
 		    console.log("The user hit cancel!");

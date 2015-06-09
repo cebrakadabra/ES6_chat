@@ -16,7 +16,7 @@
 </div>
 
 <div class="userfield">
-  <div class="padder">
+  <div class="padder bgcolor">
     <p class="nomargin">Users online:</p>
   </div>
   <div class="padder">
@@ -26,15 +26,16 @@
 </div>
 
 <div class="roomfield">
-  <form>
-    <input type="text" placeholder="Create a new room" id="newroominput" ng-model="newroom" ng-enter="createNewRoom(newroom)">
-    <input type="button" id="createnewroom" ng-click="createNewRoom(newroom)" value="Create">
-  </form>
-  <br>
-  <br>
-  <div class="padder">
-    <p>current room: {{currentroom}}</p>
-    <p ng-repeat="room in roomlist" ng-click="switchRoom(room)">{{room}}</p>
+  <div class="bgcolor">
+    <form>
+      <input type="text" placeholder="Create a new room" id="newroominput" ng-model="newroom" ng-enter="createNewRoom(newroom)">
+      <input type="button" id="createnewroom" ng-click="createNewRoom(newroom)" value="Create">
+    </form>
   </div>
+  <div class="bgcolorroom">
+    <p class="nomargin center fontsize">You are in {{currentroom}}</p>
+  </div>
+  <p class="nomargin roomitem" ng-repeat="room in roomlist" ng-click="switchRoom(room)">{{room}}</p>
+
   <div id="rooms"></div>
 </div>
