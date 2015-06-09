@@ -60,8 +60,14 @@ or if you are a lazy reader and you use mac:
 * express
 
 ####Doku
-* doccoo
+* docco
 * /doc directory
+
+Install docco:
+https://www.npmjs.com/package/grunt-docco
+
+``` npm install grunt-docco --save-dev ```
+
 
 ####Code Coverage
 * Istanbul
