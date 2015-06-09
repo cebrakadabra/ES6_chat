@@ -176,6 +176,24 @@ angular.module('chatapp.controller', [])
 				}
 			};
 
+			$scope.displayUsers = function(){
+				$(".roomfield").css("display", "none");
+				$(".userfield").css("display", "block");
+			};
+
+			$scope.displayRooms = function(){
+				$(".userfield").css("display", "none");
+				$(".roomfield").css("display", "block");
+			};
+
+			$scope.removeUserDisplay = function(){
+				$(".userfield").css("display", "none");
+			};
+
+			$scope.removeRoomDisplay = function(){
+				$(".roomfield").css("display", "none");
+			};
+
 
 
 	}])

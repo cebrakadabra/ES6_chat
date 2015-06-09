@@ -64,11 +64,11 @@ $icon-bg-color: #114F7F;
   width: 250px;
   height: auto;
   min-height: 200px;
-  background: $third-background-color;
+  background: transparent;
   position: absolute;
   top: 35px;
   left: 37px;
-  display: block;
+  display: none;
   z-index: 500;
 }
 
@@ -82,9 +82,9 @@ $icon-bg-color: #114F7F;
   min-height: 200px;
   background: transparent;
   position: absolute;
-  top: 370px;
+  top: 70px;
   left: 37px;
-  display: block;
+  display: none;
   z-index: 500;
 }
 
@@ -103,13 +103,21 @@ $icon-bg-color: #114F7F;
   @include scale(1.1);
 }
 
+.useritem{
+  background: $third-background-color;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  font-size: 12px;
+}
+
 .padder{
   padding: 10px;
 }
 
 #newroominput{
   width: 73%;
-  height: 30px;
+  height: 35px;
   background: transparent;
   border-right: 1px solid $third-background-color;
   border-left: none;
@@ -142,4 +150,12 @@ $icon-bg-color: #114F7F;
 
 .fontsize{
   font-size: 12px;
+}
+
+.userheaderheight{
+  height: 14px;
+}
+
+.iconheight{
+  height: 35px;
 }

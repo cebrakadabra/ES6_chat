@@ -2,10 +2,10 @@
   <div class="firstsidebaricon">
     <i class="firsticonself fa fa-comments"></i>
   </div>
-  <div class="sidebaricon">
+  <div class="sidebaricon" ng-mouseover="displayUsers()">
     <i class="iconself fa fa-user"></i>
   </div>
-  <div class="sidebaricon">
+  <div class="sidebaricon" ng-mouseover="displayRooms()">
     <i class="iconself fa fa-sign-out"></i>
   </div>
   <a href="https://github.com/cebrakadabra/ES6_chat" target="blank" class="custom-link">
@@ -15,18 +15,18 @@
   </a>
 </div>
 
-<div class="userfield">
-  <div class="padder bgcolor">
-    <p class="nomargin">Users online:</p>
+<div class="userfield" ng-mouseleave="removeUserDisplay()">
+  <div class="padder bgcolor userheaderheight">
+    <p class="nomargin">Users online</p>
   </div>
-  <div class="padder">
-    <!-- <div id="users"></div> -->
-    <p ng-repeat="user in users">{{user.name}}<br><small>in {{user.room}}</small></p>
+
+  <div class="useritem" ng-repeat="user in users">
+    <p class="nomargin">{{user.name}}<br><small>in {{user.room}}</small></p>
   </div>
 </div>
 
-<div class="roomfield">
-  <div class="bgcolor">
+<div class="roomfield" ng-mouseleave="removeRoomDisplay()">
+  <div class="bgcolor iconheight">
     <form>
       <input type="text" placeholder="Create a new room" id="newroominput" ng-model="newroom" ng-enter="createNewRoom(newroom)">
       <input type="button" id="createnewroom" ng-click="createNewRoom(newroom)" value="Create">
