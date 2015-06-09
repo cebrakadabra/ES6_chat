@@ -11,8 +11,11 @@ angular.module('chatapp.services', [])
 
 		var roomdata = [];
 
-		// call to get all rooms
+		// Call to get all Rooms via the Mongoose API
 		var getRooms = function getRooms(){
+
+			//GET Request
+
 			$http({
 				method: 'GET',
 				url: '/api/room'
@@ -30,13 +33,20 @@ angular.module('chatapp.services', [])
 		};
 
 
-		// call to POST and create a new room
+		// Call to insert a new Room into the database via Mongoose API
 		var createRoom = function createRoom(roomName){
+
+			//POST Request
+
 			console.log(roomName);
 			return $http.post('/api/room', roomName);
 		};
 
+		// Call to delete a single Room in the database via Mongoose API
 		var deleteRoom = function deleteRoom(id){
+
+			//DELETE Request
+
 			return $http.delete('/api/room/' + id);
 		};
 
@@ -51,8 +61,11 @@ angular.module('chatapp.services', [])
 
 	.factory('UserService', ['$interval', '$filter', '$http',  function($interval, $filter, $http){
 		return {
-				// call to get all user
+
+				// Call to get all Users via the Mongoose API
 				get : function() {
+
+						//GET Request
 
 						var data_array = [];
 
@@ -77,8 +90,10 @@ angular.module('chatapp.services', [])
 						};
 				},
 
-				// call to POST and create a new user
+				// Call to insert a new User into the database via Mongoose API
 				create : function(userData, callback) {
+
+						//POST Request
 
 						var test = $http({
 							method: 'POST',
@@ -98,8 +113,11 @@ angular.module('chatapp.services', [])
 
 				},
 
-				// call to DELETE a user
+				// Call to delete a single User in the database via Mongoose API
 				delete : function(name) {
+
+						//DELETE Request
+
 						return $http.delete('/api/user/' + name);
 				}
 		};
