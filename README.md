@@ -4,7 +4,6 @@ A simple chat application using a full development stack with ECMAScript6 inside
 ## TODO
 * switch to ES6
 * testing
-* doccoo
 
 ## Installation instructions
 
@@ -60,8 +59,9 @@ or if you are a lazy reader and you use mac:
 * express
 
 ####Doku
-* doccoo
+* docco
 * /doc directory
+
 
 ####Code Coverage
 * Istanbul

@@ -86,6 +86,32 @@ grunt.initConfig({
         }
       }
     },
+    docco: {
+      nodejs: {
+        src: [
+          'app.js'
+        ],
+        options: {
+          output: 'docs/'
+        }
+      },
+      api: {
+        src: [
+          'api/**/*.js'
+        ],
+        options: {
+          output: 'docs/api/'
+        }
+      },
+      app: {
+        src: [
+          'app/js/**/*.js'
+        ],
+        options: {
+          output: 'docs/app'
+        }
+      }
+    },
     watch: {
       html: {
         files: ['app/index.html','app/partials/*.html'],
@@ -108,9 +134,12 @@ grunt.initConfig({
     }
 });
 
+grunt.loadNpmTasks('grunt-docco');
+
 // register Grunt tasks
 grunt.registerTask('default', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint']);
 grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'watch']);
 grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint']);
+grunt.registerTask('doc', ['docco']);
 
 };
