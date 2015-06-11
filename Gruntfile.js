@@ -78,6 +78,7 @@ grunt.initConfig({
       files: ['gruntfile.js', 'app/js/**/*.js', 'app/js/app.js'],
       options: {
           // more options here if you want to override JSHint defaults
+        esnext: true,
         globals: {
           jQuery: true,
           console: true,

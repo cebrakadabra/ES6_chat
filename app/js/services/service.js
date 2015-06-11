@@ -5,21 +5,21 @@ angular.module('chatapp.services', [])
 
 	.factory('RoomService', ['$interval', '$filter', '$http',  function($interval, $filter, $http){
 
-		var rooms = {
+		let rooms = {
 			data: null
 		};
 
-		var roomdata = [];
+		let roomdata = [];
 
 		// call to get all rooms
-		var getRooms = function getRooms(){
+		let getRooms = function getRooms(){
 			$http({
 				method: 'GET',
 				url: '/api/room'
 			})
 			.success(function(data, status, headers, config) {
 				rooms.data = data;
-				for(var i = 0; i < rooms.data.length; i++){
+				for(let i = 0; i < rooms.data.length; i++){
 					roomdata.push(rooms.data[i].name);
 				}
 			})
@@ -31,12 +31,12 @@ angular.module('chatapp.services', [])
 
 
 		// call to POST and create a new room
-		var createRoom = function createRoom(roomName){
+		let createRoom = function createRoom(roomName){
 			console.log(roomName);
 			return $http.post('/api/room', roomName);
 		};
 
-		var deleteRoom = function deleteRoom(id){
+		let deleteRoom = function deleteRoom(id){
 			return $http.delete('/api/room/' + id);
 		};
 
@@ -54,16 +54,16 @@ angular.module('chatapp.services', [])
 				// call to get all user
 				get : function() {
 
-						var data_array = [];
+						let data_array = [];
 
 						$http({
 				      method: 'GET',
 				      url: '/api/user'
 				    })
 				    .success(function(data, status, headers, config) {
-				      var rooms = data;
+				      let rooms = data;
 
-				      for(var i = 0; i < rooms.length; i++){
+				      for(let i = 0; i < rooms.length; i++){
 				        data_array.push(rooms[i]);
 				      }
 				    })
@@ -80,7 +80,7 @@ angular.module('chatapp.services', [])
 				// call to POST and create a new user
 				create : function(userData, callback) {
 
-						var test = $http({
+						let test = $http({
 							method: 'POST',
 							url: '/api/user',
 							data: userData

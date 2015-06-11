@@ -7,7 +7,7 @@ require('angular-route');
 
 
 // Create your app
-var chatapp = angular.module('chatApp',
+let chatapp = angular.module('chatApp',
 	[
 		'ngRoute',
 		/* 'ngAnimate', */

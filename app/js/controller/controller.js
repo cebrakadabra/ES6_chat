@@ -2,7 +2,7 @@ angular.module('chatapp.controller', [])
 /***
  *
  */
-	.controller('MainCtrl', ['$scope', '$location', '$anchorScroll', '$interval', '$timeout', 'RoomService', 'UserService', function ($scope, $location, $anchorScroll, $interval, $timeout, RoomService, UserService) {
+	.controller('MainCtrl', ['$scope', '$location', 'RoomService', 'UserService', function ($scope, $location, RoomService, UserService) {
 
 		// $scope.users = UserService.get();
 		// console.log($scope.users);
@@ -36,7 +36,7 @@ angular.module('chatapp.controller', [])
 
 	}])
 
-	.controller('ChatController', ['$scope', '$location', '$anchorScroll', '$interval', '$timeout', 'RoomService', 'UserService', function ($scope, $location, $anchorScroll, $interval, $timeout, RoomService, UserService) {
+	.controller('ChatController', ['$scope', '$location', 'RoomService', 'UserService', function ($scope, $location, RoomService, UserService) {
 
 
 
@@ -52,8 +52,8 @@ angular.module('chatapp.controller', [])
 			// **************************
 			// only for DEV -- user will be retrieved from window before then (Rooms, as well as romm itself)
 
-			// var date = new Date();
-			// var name = "Steve "+date;
+			// let date = new Date();
+			// let name = "Steve "+date;
 			// $scope.$apply(function(){
 			// 	$scope.newUser.name = name;
 			// });
@@ -67,8 +67,8 @@ angular.module('chatapp.controller', [])
 
 		// listener, whenever the server emits 'updatechat', this updates the chat body
 		$scope.socket.on('updatechat', function (username, data) {
-			var currentdate = new Date();
-			var datetime = "Last Sync: " + currentdate.getDate() + "/" +
+			let currentdate = new Date();
+			let datetime = "Last Sync: " + currentdate.getDate() + "/" +
 											(currentdate.getMonth()+1)  + "/" +
 											currentdate.getFullYear() + " @ " +
 											currentdate.getHours() + ":" +
@@ -87,7 +87,7 @@ angular.module('chatapp.controller', [])
 
 
 
-			// var objDiv = document.getElementById("conversation");
+			// let objDiv = document.getElementById("conversation");
 			// objDiv.scrollTop = objDiv.scrollHeight;
 		});
 
@@ -138,8 +138,8 @@ angular.module('chatapp.controller', [])
 		// listener, if a user switches the room, the view should be updated
 		$scope.socket.on('updateuserifRoomSwitched', function(user, room){
 
-			var index;
-			for(var i = 0; i < $scope.users.length; i++){
+			let index;
+			for(let i = 0; i < $scope.users.length; i++){
 				if(user === $scope.users[i].name){
 					index = i;
 				}
@@ -207,7 +207,7 @@ angular.module('chatapp.controller', [])
 	}])
 
 
-	.controller('RoomController', ['$scope', '$sce', '$location', '$anchorScroll', '$interval', '$timeout', 'RoomService', 'UserService', function ($scope, $sce, $location, $anchorScroll, $interval, $timeout, RoomService, UserService) {
+	.controller('RoomController', ['$scope', '$location', '$timeout', 'RoomService', 'UserService', function ($scope, $location, $timeout, RoomService, UserService) {
 		// //Use Roomservice to call the api that calls mongoose that calls mongodb ;)
 		// $scope.rooms = RoomService.get();
 		// console.log($scope.rooms);
