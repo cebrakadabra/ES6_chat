@@ -16,6 +16,9 @@ grunt.initConfig({
     },
     browserify: {
       js: {
+        options: {
+          transform: [["babelify", { "stage": 0 }]]
+        },
         // A single entry point for our app
         src: [
           'app/js/app.js',

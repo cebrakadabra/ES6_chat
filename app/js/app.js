@@ -5,18 +5,35 @@ require('angular-ui-router');
 require('angular-route');
 // require('angular-animate');
 
+// ES6 imports
+// *************
+
+// Import Controllers
+import { MainCtrl } from './controller/MainCtrl';
+import { RoomController } from './controller/RoomController';
+import { ChatController } from './controller/ChatController';
+
+// Import Services
+// import { UserService } from './services/UserService';
+
+// Import Directives
+
 
 // Create your app
 let chatapp = angular.module('chatApp',
 	[
 		'ngRoute',
 		/* 'ngAnimate', */
-    'chatapp.controller',
+    /* 'chatapp.controller',*/
 		'chatapp.services',
 		'chatapp.directives',
 		//'luegg.directives'
 
-	]);
+	])
+	.controller('MainCtrl', MainCtrl)
+	.controller('RoomController', RoomController)
+	.controller('ChatController', ChatController);
+	// .service('UserService', UserService);
 
 // Configuration
 chatapp.config(function($logProvider){

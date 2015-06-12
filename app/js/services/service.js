@@ -95,7 +95,7 @@ angular.module('chatapp.services', [])
 
 						//POST Request
 
-						let test = $http({
+						$http({
 							method: 'POST',
 							url: '/api/user',
 							data: userData
