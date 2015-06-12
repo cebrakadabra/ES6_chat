@@ -15,7 +15,7 @@ import { ChatController } from './controller/ChatController';
 
 // Import Services
 // import { UserService } from './services/UserService';
-
+// import { RoomService } from './services/RoomService';
 // Import Directives
 
 
@@ -33,7 +33,8 @@ let chatapp = angular.module('chatApp',
 	.controller('MainCtrl', MainCtrl)
 	.controller('RoomController', RoomController)
 	.controller('ChatController', ChatController);
-	// .service('UserService', UserService);
+	// .service('UserService', UserService)
+	// .service('RoomService', RoomService);
 
 // Configuration
 chatapp.config(function($logProvider){

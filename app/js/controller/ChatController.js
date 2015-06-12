@@ -140,6 +140,7 @@ class ChatController{
 			$scope.createNewRoom = function(newroom){
 				if(newroom !== undefined && newroom !== ''){
 					$scope.socket.emit('createRoom', newroom);
+          RoomService.createRoom({name: newroom});
 					$("#newroominput").val('');
 					$scope.newroom = '';
 				}
