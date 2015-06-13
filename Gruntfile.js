@@ -118,31 +118,28 @@ grunt.initConfig({
     watch: {
       html: {
         files: ['app/index.html','app/partials/*.html'],
-        tasks: ['copy'],
+        tasks: ['copy', 'docco'],
         options: {
           livereload: true
         }
       },
       css: {
         files: ['app/scss/*.scss'],
-        tasks: ['sass', 'cssmin'],
+        tasks: ['sass', 'cssmin', 'docco'],
         options: {
           livereload: true
         }
       },
       js: {
         files: ['<%= jshint.files %>'],
-        tasks: ['jshint', 'browserify', 'babel']
+        tasks: ['jshint', 'browserify', 'babel', 'docco']
       }
     }
 });
 
-grunt.loadNpmTasks('grunt-docco');
-
 // register Grunt tasks
-grunt.registerTask('default', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint']);
+grunt.registerTask('default', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'watch']);
-grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint']);
-grunt.registerTask('doc', ['docco']);
+grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 
 };

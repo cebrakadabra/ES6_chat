@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="app.html">
+                app.js
+              </a>
+            
+              
+              <a class="source" href="ChatController.html">
+                ChatController.js
+              </a>
+            
+              
+              <a class="source" href="MainCtrl.html">
+                MainCtrl.js
+              </a>
+            
+              
+              <a class="source" href="RoomController.html">
+                RoomController.js
+              </a>
+            
+              
+              <a class="source" href="controller.html">
+                controller.js
+              </a>
+            
+              
+              <a class="source" href="view.html">
+                view.js
+              </a>
+            
+              
+              <a class="source" href="RoomService.html">
+                RoomService.js
+              </a>
+            
+              
+              <a class="source" href="UserService.html">
+                UserService.js
+              </a>
+            
+              
+              <a class="source" href="service.html">
+                service.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>This will include ./node_modules/angular/angular.js
+and give us access to the <code>angular</code> global object.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-built_in">require</span>(<span class="hljs-string">'angular'</span>);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'angular-ui-router'</span>);
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'angular-route'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>require(‘angular-animate’);</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>ES6 imports</p>
+<hr>
+<p>Import Controllers</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> { MainCtrl } <span class="hljs-keyword">from</span> <span class="hljs-string">'./controller/MainCtrl'</span>;
+<span class="hljs-keyword">import</span> { RoomController } <span class="hljs-keyword">from</span> <span class="hljs-string">'./controller/RoomController'</span>;
+<span class="hljs-keyword">import</span> { ChatController } <span class="hljs-keyword">from</span> <span class="hljs-string">'./controller/ChatController'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Import Services</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">import</span> { UserService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./services/UserService'</span>;
+<span class="hljs-keyword">import</span> { RoomService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./services/RoomService'</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Create your app</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">let</span> chatapp = angular.module(<span class="hljs-string">'chatApp'</span>,
+  [
+    <span class="hljs-string">'ngRoute'</span>,
+    <span class="hljs-comment">/* 'ngAnimate', */</span>
+    <span class="hljs-comment">/* 'chatapp.controller',*/</span>
+    <span class="hljs-comment">/* 'chatapp.services', */</span>
+    <span class="hljs-string">'chatapp.directives'</span>
+  ])
+  .controller(<span class="hljs-string">'MainCtrl'</span>, MainCtrl)
+  .controller(<span class="hljs-string">'RoomController'</span>, RoomController)
+  .controller(<span class="hljs-string">'ChatController'</span>, ChatController)
+  .service(<span class="hljs-string">'UserService'</span>, UserService)
+  .service(<span class="hljs-string">'RoomService'</span>, RoomService);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Configuration</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>chatapp.config(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$logProvider</span>)</span>{
+  $logProvider.debugEnabled(<span class="hljs-literal">false</span>);
+});
+
+chatapp.config([<span class="hljs-string">'$routeProvider'</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$routeProvider</span>) </span>{
+    $routeProvider.
+      when(<span class="hljs-string">'/chat'</span>, {
+        templateUrl: <span class="hljs-string">'partials/chat.html'</span>,
+        controller: <span class="hljs-string">'ChatController'</span>
+      }).
+      when(<span class="hljs-string">'/rooms'</span>, {
+        templateUrl: <span class="hljs-string">'partials/room.html'</span>,
+        controller: <span class="hljs-string">'RoomController'</span>
+      }).
+      otherwise({
+        redirectTo: <span class="hljs-string">'/rooms'</span>
+      });
+  }]);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Run</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>chatapp.run(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$log</span>)</span>{
+  $log.debug(<span class="hljs-string">"test debug"</span>);
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

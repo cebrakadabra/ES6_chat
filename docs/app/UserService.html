@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>UserService.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="app.html">
+                app.js
+              </a>
+            
+              
+              <a class="source" href="ChatController.html">
+                ChatController.js
+              </a>
+            
+              
+              <a class="source" href="MainCtrl.html">
+                MainCtrl.js
+              </a>
+            
+              
+              <a class="source" href="RoomController.html">
+                RoomController.js
+              </a>
+            
+              
+              <a class="source" href="controller.html">
+                controller.js
+              </a>
+            
+              
+              <a class="source" href="view.html">
+                view.js
+              </a>
+            
+              
+              <a class="source" href="RoomService.html">
+                RoomService.js
+              </a>
+            
+              
+              <a class="source" href="UserService.html">
+                UserService.js
+              </a>
+            
+              
+              <a class="source" href="service.html">
+                service.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>UserService.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>ES6 UserService</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserService</span></span>{
+  constructor($http){
+    <span class="hljs-keyword">this</span>.$http = $http;
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>GET Request
+Call to get all Users via the Mongoose API</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  get(){
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$http,get(<span class="hljs-string">'/api/user'</span>);
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>POST Request
+Call to insert a new User into the database via Mongoose API</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  create(userData, callback){
+    <span class="hljs-keyword">this</span>.$http({
+      method: <span class="hljs-string">'POST'</span>,
+      url: <span class="hljs-string">'/api/user'</span>,
+      data: userData
+      })
+    .success(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+      <span class="hljs-built_in">console</span>.log(status);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>callback if user creation succeded</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      callback(<span class="hljs-literal">true</span>, userData);
+    })
+    .error(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+      <span class="hljs-built_in">console</span>.log(status);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>callback if user creation was not successful</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      callback(<span class="hljs-literal">false</span>, <span class="hljs-literal">null</span>);
+    });
+  }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>DELETE Request
+Call to delete a single User in the database via Mongoose API</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">delete</span>(name){
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$http.delete(<span class="hljs-string">'/api/user/'</span> + name);
+  }
+
+
+}
+
+<span class="hljs-keyword">export</span> { UserService };</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

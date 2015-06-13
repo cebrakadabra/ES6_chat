@@ -20,23 +20,22 @@ import { RoomService } from './services/RoomService';
 
 // Create your app
 let chatapp = angular.module('chatApp',
-	[
-		'ngRoute',
-		/* 'ngAnimate', */
+  [
+    'ngRoute',
+    /* 'ngAnimate', */
     /* 'chatapp.controller',*/
-		/* 'chatapp.services', */
-		'chatapp.directives'
-
-	])
-	.controller('MainCtrl', MainCtrl)
-	.controller('RoomController', RoomController)
-	.controller('ChatController', ChatController)
-	.service('UserService', UserService)
-	.service('RoomService', RoomService);
+    /* 'chatapp.services', */
+    'chatapp.directives'
+  ])
+  .controller('MainCtrl', MainCtrl)
+  .controller('RoomController', RoomController)
+  .controller('ChatController', ChatController)
+  .service('UserService', UserService)
+  .service('RoomService', RoomService);
 
 // Configuration
 chatapp.config(function($logProvider){
-	$logProvider.debugEnabled(false);
+  $logProvider.debugEnabled(false);
 });
 
 chatapp.config(['$routeProvider',
@@ -44,11 +43,11 @@ chatapp.config(['$routeProvider',
     $routeProvider.
       when('/chat', {
         templateUrl: 'partials/chat.html',
-				controller: 'ChatController'
+        controller: 'ChatController'
       }).
-			when('/rooms', {
+      when('/rooms', {
         templateUrl: 'partials/room.html',
-				controller: 'RoomController'
+        controller: 'RoomController'
       }).
       otherwise({
         redirectTo: '/rooms'
@@ -57,5 +56,5 @@ chatapp.config(['$routeProvider',
 
 // Run
 chatapp.run(function($log){
-	$log.debug("test debug");
+  $log.debug("test debug");
 });

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-pi">"use strict"</span>;
+<span class="hljs-comment">/*
+  ****************************************
+  Chat Backend
+  Autoren: Eberl Christoph &amp; Bernhard Zweimüller
+  ****************************************
+*/</span>
+
+<span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>),
+    app = express(),
+    server = <span class="hljs-built_in">require</span>(<span class="hljs-string">'http'</span>).createServer(app),
+    io = <span class="hljs-built_in">require</span>(<span class="hljs-string">'socket.io'</span>).listen(server),
+    bodyParser = <span class="hljs-built_in">require</span>( <span class="hljs-string">"body-parser"</span> ),
+    mongoose = <span class="hljs-built_in">require</span>( <span class="hljs-string">"mongoose"</span> );
+
+app.use(bodyParser.urlencoded({extended: <span class="hljs-literal">true</span>}));
+app.use(bodyParser.json());</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>import and bind api</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./api"</span>);
+app.use(api);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>set our port</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> port = process.env.PORT || <span class="hljs-number">1337</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>use of static files</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.use(express.static(__dirname + <span class="hljs-string">'/dist/public'</span>));
+app.use(<span class="hljs-string">'/partials'</span>, express.static(__dirname + <span class="hljs-string">'/dist/partials'</span>));
+app.use(<span class="hljs-string">'/fonts'</span>, express.static(__dirname + <span class="hljs-string">'/dist/fonts'</span>));
+app.use(<span class="hljs-string">'/images'</span>, express.static(__dirname + <span class="hljs-string">'/dist/images'</span>));</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>routing</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.get(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) </span>{
+    res.sendFile(__dirname + <span class="hljs-string">'/dist/index.html'</span>);
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>let server listen on port</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>server.listen(port);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"\n$ *** SERVER SETUP *** $"</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Magic happens on localhost:"</span>+port);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>rooms which are currently available in chat
+var rooms = [‘Österreich’,’Salzburg’,’Wien’];</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>expose app</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>exports = <span class="hljs-built_in">module</span>.exports = app;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>usernames which are currently connected to the chat</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> usernames = {};
+
+
+
+
+io.sockets.on(<span class="hljs-string">'connection'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">socket</span>) </span>{
+
+  <span class="hljs-keyword">var</span> rooms = [];
+  <span class="hljs-keyword">var</span> connection = <span class="hljs-literal">null</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>connect to database</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  connection = mongoose.createConnection( <span class="hljs-string">'mongodb://localhost/ES6chat2015CEBZ'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>get rooms from database</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  connection.on(<span class="hljs-string">"open"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>read rooms</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> collection = connection.db.collection(<span class="hljs-string">'rooms'</span>);
+    collection.find().toArray(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, roomNames</span>) </span>{
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; roomNames.length; i++){
+          rooms.push(roomNames[i].name);
+        }
+    });
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>when the client emits ‘sendchat’, this listens and executes</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  socket.on(<span class="hljs-string">'sendchat'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>we tell the client to execute ‘updatechat’ with 2 parameters</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    io.sockets.in(socket.room).emit(<span class="hljs-string">'updatechat'</span>, socket.username, data);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>when the client emits ‘adduser’, this listens and executes</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  socket.on(<span class="hljs-string">'adduser'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">username, roomName</span>)</span>{
+
+    <span class="hljs-keyword">if</span> (username === <span class="hljs-string">""</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>user pressed OK, but the input field was empty</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"User has no username!"</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (username) {
+      socket.emit(<span class="hljs-string">'displayUsername'</span>, username);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>user typed something and hit OK
+we store the username in the socket session for this client</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      socket.username = username;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>store the room name in the socket session for this client
+socket.room = selected Room from UI</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      socket.room = roomName;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>add the client’s username to the global list</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      usernames[username] = roomName;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>send client to room 1</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      socket.join(roomName);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>echo to client they’ve connected</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      socket.emit(<span class="hljs-string">'updatechat'</span>, <span class="hljs-string">'SERVER'</span>, <span class="hljs-string">'you have connected'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>echo globally (all clients) that a person has connected</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      socket.broadcast.to(roomName).emit(<span class="hljs-string">'updatechat'</span>, <span class="hljs-string">'SERVER'</span>, username + <span class="hljs-string">' has connected'</span>);
+      socket.emit(<span class="hljs-string">'updaterooms'</span>, rooms, roomName);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>update the list of users in chat, client-side</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      io.sockets.emit(<span class="hljs-string">'updateusers'</span>, usernames);
+
+    } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>user hit cancel</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"The user hit cancel or left the chat app!"</span>);
+    }
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-25">&#182;</a>
+              </div>
+              <p>if the user wants to switch the room ….</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  socket.on(<span class="hljs-string">'switchRoom'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">newroom</span>)</span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-26">&#182;</a>
+              </div>
+              <p>leave the current room (stored in session)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    socket.leave(socket.room);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>join new room, received as function parameter</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    socket.join(newroom);
+    socket.emit(<span class="hljs-string">'updatechat'</span>, <span class="hljs-string">'SERVER'</span>, <span class="hljs-string">'you have connected to '</span>+ newroom);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>sent message to OLD room</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    socket.broadcast.to(socket.room).emit(<span class="hljs-string">'updatechat'</span>, <span class="hljs-string">'SERVER'</span>, socket.username+<span class="hljs-string">' has left this room'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
+              </div>
+              <p>update socket session room title</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    socket.room = newroom;
+    socket.broadcast.to(newroom).emit(<span class="hljs-string">'updatechat'</span>, <span class="hljs-string">'SERVER'</span>, socket.username+<span class="hljs-string">' has joined this room'</span>);
+    socket.emit(<span class="hljs-string">'updaterooms'</span>, rooms, newroom);
+    socket.broadcast.emit(<span class="hljs-string">'updateuserifRoomSwitched'</span>, socket.username, newroom);
+    socket.emit(<span class="hljs-string">'updateuserifRoomSwitched'</span>, socket.username, newroom);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-30">&#182;</a>
+              </div>
+              <p>If you want to add additional Chatrooms</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  socket.on(<span class="hljs-string">'createRoom'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">newroom</span>)</span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-31">&#182;</a>
+              </div>
+              <p>remove</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    rooms.push(newroom);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-32">&#182;</a>
+              </div>
+              <p>socket.emit(‘updateroomwithnewroom’, newroom);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    socket.emit(<span class="hljs-string">'updaterooms'</span>, rooms, socket.room);
+    socket.broadcast.emit(<span class="hljs-string">'updaterooms'</span>, rooms, socket.room);
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-33">&#182;</a>
+              </div>
+              <p>when the user disconnects.. perform this</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  socket.on(<span class="hljs-string">'disconnect'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-34">&#182;</a>
+              </div>
+              <p>remove the username from global usernames list</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">delete</span> usernames[socket.username];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-35">&#182;</a>
+              </div>
+              <p>update list of users in chat, client-side</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    io.sockets.emit(<span class="hljs-string">'updateusers'</span>, usernames);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-36">&#182;</a>
+              </div>
+              <p>echo globally that this client has left</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    socket.broadcast.emit(<span class="hljs-string">'updatechat'</span>, <span class="hljs-string">'SERVER'</span>, socket.username + <span class="hljs-string">' has disconnected'</span>);
+  });
+
+
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

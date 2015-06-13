@@ -18,12 +18,12 @@ class UserService{
       })
     .success(function(data, status, headers, config) {
       console.log(status);
-      // bool.value = true;
+      // callback if user creation succeded
       callback(true, userData);
     })
     .error(function(data, status, headers, config) {
       console.log(status);
-      // bool.value = false;
+      // callback if user creation was not successful
       callback(false, null);
     });
   }

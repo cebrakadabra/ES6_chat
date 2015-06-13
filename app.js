@@ -1,9 +1,9 @@
 "use strict";
 /*
-	****************************************
-	Chat Backend
-	Autoren: Eberl Christoph & Bernhard Zweimüller
-	****************************************
+  ****************************************
+  Chat Backend
+  Autoren: Eberl Christoph & Bernhard Zweimüller
+  ****************************************
 */
 
 var express = require('express'),
@@ -81,84 +81,84 @@ io.sockets.on('connection', function (socket) {
 
 
 
-	// when the client emits 'sendchat', this listens and executes
-	socket.on('sendchat', function (data) {
-		// we tell the client to execute 'updatechat' with 2 parameters
-		io.sockets.in(socket.room).emit('updatechat', socket.username, data);
-	});
+  // when the client emits 'sendchat', this listens and executes
+  socket.on('sendchat', function (data) {
+    // we tell the client to execute 'updatechat' with 2 parameters
+    io.sockets.in(socket.room).emit('updatechat', socket.username, data);
+  });
 
-	// when the client emits 'adduser', this listens and executes
-	socket.on('adduser', function(username, roomName){
+  // when the client emits 'adduser', this listens and executes
+  socket.on('adduser', function(username, roomName){
 
-		if (username === "") {
-		    // user pressed OK, but the input field was empty
-		    console.log("User has no username!");
-		} else if (username) {
-			socket.emit('displayUsername', username);
-		    // user typed something and hit OK
-		    // we store the username in the socket session for this client
-			socket.username = username;
-			// store the room name in the socket session for this client
-			//socket.room = selected Room from UI
+    if (username === "") {
+      // user pressed OK, but the input field was empty
+      console.log("User has no username!");
+    } else if (username) {
+      socket.emit('displayUsername', username);
+      // user typed something and hit OK
+      // we store the username in the socket session for this client
+      socket.username = username;
+      // store the room name in the socket session for this client
+      //socket.room = selected Room from UI
       socket.room = roomName;
 
-			// add the client's username to the global list
-			usernames[username] = roomName;
+      // add the client's username to the global list
+      usernames[username] = roomName;
 
-			// send client to room 1
-			socket.join(roomName);
-			// echo to client they've connected
-			socket.emit('updatechat', 'SERVER', 'you have connected');
-			// echo globally (all clients) that a person has connected
-			socket.broadcast.to(roomName).emit('updatechat', 'SERVER', username + ' has connected');
-			socket.emit('updaterooms', rooms, roomName);
-			// update the list of users in chat, client-side
-			io.sockets.emit('updateusers', usernames);
+      // send client to room 1
+      socket.join(roomName);
+      // echo to client they've connected
+      socket.emit('updatechat', 'SERVER', 'you have connected');
+      // echo globally (all clients) that a person has connected
+      socket.broadcast.to(roomName).emit('updatechat', 'SERVER', username + ' has connected');
+      socket.emit('updaterooms', rooms, roomName);
+      // update the list of users in chat, client-side
+      io.sockets.emit('updateusers', usernames);
 
-		} else {
-		    // user hit cancel
-		    console.log("The user hit cancel!");
-		}
-	});
+    } else {
+     // user hit cancel
+     console.log("The user hit cancel or left the chat app!");
+    }
+  });
 
-	// if the user wants to switch the room ....
-	socket.on('switchRoom', function(newroom){
-		// leave the current room (stored in session)
-		socket.leave(socket.room);
-		// join new room, received as function parameter
-		socket.join(newroom);
-		socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
-		// sent message to OLD room
-		socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
-		// update socket session room title
-		socket.room = newroom;
-		socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
-		socket.emit('updaterooms', rooms, newroom);
-		socket.broadcast.emit('updateuserifRoomSwitched', socket.username, newroom);
-		socket.emit('updateuserifRoomSwitched', socket.username, newroom);
-	});
+  // if the user wants to switch the room ....
+  socket.on('switchRoom', function(newroom){
+    // leave the current room (stored in session)
+    socket.leave(socket.room);
+    // join new room, received as function parameter
+    socket.join(newroom);
+    socket.emit('updatechat', 'SERVER', 'you have connected to '+ newroom);
+    // sent message to OLD room
+    socket.broadcast.to(socket.room).emit('updatechat', 'SERVER', socket.username+' has left this room');
+    // update socket session room title
+    socket.room = newroom;
+    socket.broadcast.to(newroom).emit('updatechat', 'SERVER', socket.username+' has joined this room');
+    socket.emit('updaterooms', rooms, newroom);
+    socket.broadcast.emit('updateuserifRoomSwitched', socket.username, newroom);
+    socket.emit('updateuserifRoomSwitched', socket.username, newroom);
+  });
 
-	// If you want to add additional Chatrooms
-	socket.on('createRoom', function(newroom){
+  // If you want to add additional Chatrooms
+  socket.on('createRoom', function(newroom){
 
     //remove
     rooms.push(newroom);
 
-		//socket.emit('updateroomwithnewroom', newroom);
-		socket.emit('updaterooms', rooms, socket.room);
-		socket.broadcast.emit('updaterooms', rooms, socket.room);
-	});
+    //socket.emit('updateroomwithnewroom', newroom);
+    socket.emit('updaterooms', rooms, socket.room);
+    socket.broadcast.emit('updaterooms', rooms, socket.room);
+  });
 
 
-	// when the user disconnects.. perform this
-	socket.on('disconnect', function(){
+  // when the user disconnects.. perform this
+  socket.on('disconnect', function(){
     // remove the username from global usernames list
-		delete usernames[socket.username];
-		// update list of users in chat, client-side
-		io.sockets.emit('updateusers', usernames);
-		// echo globally that this client has left
-		socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
-	});
+    delete usernames[socket.username];
+    // update list of users in chat, client-side
+    io.sockets.emit('updateusers', usernames);
+    // echo globally that this client has left
+    socket.broadcast.emit('updatechat', 'SERVER', socket.username + ' has disconnected');
+  });
 
 
 });

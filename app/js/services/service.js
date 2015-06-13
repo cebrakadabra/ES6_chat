@@ -1,3 +1,4 @@
+// OLD ES5 SERVICE MODULE
 angular.module('chatapp.services', [])
 /***
  *
@@ -61,7 +62,7 @@ angular.module('chatapp.services', [])
 
 	// .factory('UserService', ['$interval', '$filter', '$http',  function($interval, $filter, $http){
 	// 	return {
-	// 
+	//
 	// 			// Call to get all Users via the Mongoose API
 	// 			get : function() {
 	//

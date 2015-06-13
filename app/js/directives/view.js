@@ -1,13 +1,15 @@
 // OLD ES5 Directive Module
 angular.module('chatapp.directives', [])
 
-	.directive('sidebarDirective', function() {
-	    return {
-					templateUrl: 'partials/sidebar.html'
-	    };
-	})
+  // sidebar directive / partial for chat
+  .directive('sidebarDirective', function() {
+    return {
+      templateUrl: 'partials/sidebar.html'
+    };
+  })
 
-	.directive('ngEnter', function () {
+  // on Enter directive for keydown and keypress event on Enter
+  .directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
             if(event.which === 13) {

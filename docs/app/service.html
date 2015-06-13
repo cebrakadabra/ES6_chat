@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>service.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="app.html">
+                app.js
+              </a>
+            
+              
+              <a class="source" href="ChatController.html">
+                ChatController.js
+              </a>
+            
+              
+              <a class="source" href="MainCtrl.html">
+                MainCtrl.js
+              </a>
+            
+              
+              <a class="source" href="RoomController.html">
+                RoomController.js
+              </a>
+            
+              
+              <a class="source" href="controller.html">
+                controller.js
+              </a>
+            
+              
+              <a class="source" href="view.html">
+                view.js
+              </a>
+            
+              
+              <a class="source" href="RoomService.html">
+                RoomService.js
+              </a>
+            
+              
+              <a class="source" href="UserService.html">
+                UserService.js
+              </a>
+            
+              
+              <a class="source" href="service.html">
+                service.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>service.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              <p>OLD ES5 SERVICE MODULE</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>angular.module(<span class="hljs-string">'chatapp.services'</span>, [])
+<span class="hljs-comment">/***
+ *
+ */</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>.factory(‘RoomService’, [‘$interval’, ‘$filter’, ‘$http’,  function($interval, $filter, $http){</p>
+<pre><code><span class="hljs-keyword">let</span> rooms = {
+    data: <span class="hljs-literal">null</span>
+};
+
+<span class="hljs-keyword">let</span> roomdata = [];
+
+<span class="hljs-comment">// Call to get all Rooms via the Mongoose API</span>
+<span class="hljs-keyword">let</span> getRooms = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRooms</span>(<span class="hljs-params"></span>)</span>{
+
+    <span class="hljs-comment">//GET Request</span>
+
+    $http({
+        method: <span class="hljs-string">'GET'</span>,
+        url: <span class="hljs-string">'/api/room'</span>
+    })
+    .success(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+        rooms.data = data;
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; rooms.data.length; i++){
+            roomdata.push(rooms.data[i].name);
+        }
+    })
+    .error(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"error"</span>);
+        <span class="hljs-built_in">console</span>.log(status);
+    });
+};
+
+
+<span class="hljs-comment">// Call to insert a new Room into the database via Mongoose API</span>
+<span class="hljs-keyword">let</span> createRoom = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createRoom</span>(<span class="hljs-params">roomName</span>)</span>{
+
+    <span class="hljs-comment">//POST Request</span>
+
+    <span class="hljs-built_in">console</span>.log(roomName);
+    <span class="hljs-keyword">return</span> $http.post(<span class="hljs-string">'/api/room'</span>, roomName);
+};
+
+<span class="hljs-comment">// Call to delete a single Room in the database via Mongoose API</span>
+<span class="hljs-keyword">let</span> deleteRoom = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">deleteRoom</span>(<span class="hljs-params">id</span>)</span>{
+
+    <span class="hljs-comment">//DELETE Request</span>
+
+    <span class="hljs-keyword">return</span> $http.delete(<span class="hljs-string">'/api/room/'</span> + id);
+};
+
+<span class="hljs-keyword">return</span> {
+        getRooms : getRooms,
+        createRoom: createRoom,
+        deleteRoom: deleteRoom,
+        roomdata: roomdata
+</code></pre><p>  };</p>
+<p>}])</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>.factory(‘UserService’, [‘$interval’, ‘$filter’, ‘$http’,  function($interval, $filter, $http){
+    return {</p>
+<pre><code>        <span class="hljs-comment">// Call to get all Users via the Mongoose API</span>
+        get : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+        <span class="hljs-comment">//GET Request</span>
+
+        <span class="hljs-keyword">let</span> data_array = [];
+
+        $http({
+              method: <span class="hljs-string">'GET'</span>,
+              url: <span class="hljs-string">'/api/user'</span>
+            })
+            .success(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+              <span class="hljs-keyword">let</span> rooms = data;
+
+              <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; rooms.length; i++){
+                data_array.push(rooms[i]);
+              }
+            })
+            .error(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+              <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"error"</span>);
+              <span class="hljs-built_in">console</span>.log(status);
+            });
+
+                <span class="hljs-keyword">return</span> {
+                    data_array: data_array
+                };
+        },
+
+        <span class="hljs-comment">// Call to insert a new User into the database via Mongoose API</span>
+        create : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">userData, callback</span>) </span>{
+
+                <span class="hljs-comment">//POST Request</span>
+
+                $http({
+                    method: <span class="hljs-string">'POST'</span>,
+                    url: <span class="hljs-string">'/api/user'</span>,
+                    data: userData
+                    })
+                .success(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+                    <span class="hljs-built_in">console</span>.log(status);
+                    <span class="hljs-comment">// bool.value = true;</span>
+                    callback(<span class="hljs-literal">true</span>, userData.name);
+                })
+                .error(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+                    <span class="hljs-built_in">console</span>.log(status);
+                    <span class="hljs-comment">// bool.value = false;</span>
+                    callback(<span class="hljs-literal">false</span>, <span class="hljs-literal">null</span>);
+                });
+
+        },
+
+        <span class="hljs-comment">// Call to delete a single User in the database via Mongoose API</span>
+        <span class="hljs-keyword">delete</span> : <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>) </span>{
+
+                <span class="hljs-comment">//DELETE Request</span>
+
+                <span class="hljs-keyword">return</span> $http.delete(<span class="hljs-string">'/api/user/'</span> + name);
+        }
+};
+</code></pre><p>}])</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
