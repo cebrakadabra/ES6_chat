@@ -18,7 +18,7 @@ class UserService{
     .success(function(data, status, headers, config) {
       console.log(status);
       // bool.value = true;
-      callback(true, userData.name);
+      callback(true, userData);
     })
     .error(function(data, status, headers, config) {
       console.log(status);

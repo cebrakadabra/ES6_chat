@@ -7,7 +7,8 @@ class ChatController{
 		$scope.socket.on('connect', function(){
 
 			$scope.socket.emit('adduser', $scope.newUser.name, $scope.newUser.room);
-
+      console.log($scope.newUser.name);
+      console.log($scope.newUser.room);
 			// **************************
 			// **** DEV CONFIG ****
 			// **************************
@@ -55,14 +56,14 @@ class ChatController{
 
 
 		// listener, whenever the server emits 'updateusers', this updates the username list
-		$scope.socket.on('updateusers', function(data, room) {
+		$scope.socket.on('updateusers', function(data) {
 			// $('#users').empty();
-			// console.log(data);
+			console.log(data);
 			$scope.users = [];
 			$.each(data, function(key, value) {
 				// $('#users').append('<div class="user"><strong>' + key + '</strong> in ' + room + '</div>');
 				$scope.$apply(function(){
-					$scope.users.push({name: key, room: room});
+					$scope.users.push({name: key, room: value});
 				});
 
 			});

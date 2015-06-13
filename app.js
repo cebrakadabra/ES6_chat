@@ -103,7 +103,8 @@ io.sockets.on('connection', function (socket) {
       socket.room = roomName;
 
 			// add the client's username to the global list
-			usernames[username] = username;
+			usernames[username] = roomName;
+
 			// send client to room 1
 			socket.join(roomName);
 			// echo to client they've connected
@@ -112,7 +113,7 @@ io.sockets.on('connection', function (socket) {
 			socket.broadcast.to(roomName).emit('updatechat', 'SERVER', username + ' has connected');
 			socket.emit('updaterooms', rooms, roomName);
 			// update the list of users in chat, client-side
-			io.sockets.emit('updateusers', usernames, socket.room);
+			io.sockets.emit('updateusers', usernames);
 
 		} else {
 		    // user hit cancel

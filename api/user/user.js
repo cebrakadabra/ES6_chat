@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
     index: true,
     unique: true
   },
-  inRoom: { //usefull?
+  inRoom: {
         type: String
   }
 });
