@@ -60,7 +60,7 @@ or if you are a lazy reader and you use mac:
 
 ####Doku
 * docco
-* /doc directory
+* /docs directory
 
 
 ####Code Coverage
