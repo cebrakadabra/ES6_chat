@@ -174,24 +174,18 @@ grunt.initConfig({
     }
 });
 
-<<<<<<< Updated upstream
-=======
+
 grunt.loadNpmTasks('grunt-docco');
 grunt.loadNpmTasks('grunt-mocha-test');
 grunt.loadNpmTasks('grunt-istanbul');
 grunt.loadNpmTasks('grunt-env');
 
->>>>>>> Stashed changes
 // register Grunt tasks
 grunt.registerTask('default', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'watch']);
-<<<<<<< Updated upstream
 grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
-
-=======
-grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint']);
 grunt.registerTask('doc', ['docco']);
 grunt.registerTask('test', ['mochaTest']);
 grunt.registerTask('coverage', ['env:coverage', 'instrument', 'mochaTest', 'storeCoverage', 'makeReport']);
->>>>>>> Stashed changes
+
 };
