@@ -77,9 +77,22 @@
 
 <span class="hljs-keyword">var</span> connection = <span class="hljs-literal">null</span>;
 
-<span class="hljs-keyword">var</span> connectToDb = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+<span class="hljs-keyword">var</span> connectToDb = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>opening the connection via mongoose to the mongodb</p>
 
-  connection = mongoose.createConnection( <span class="hljs-string">'mongodb://localhost/ES6chat2015CEBZ'</span>, { <span class="hljs-comment">//todo</span>
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  connection = mongoose.createConnection( <span class="hljs-string">'mongodb://localhost/ES6chat2015CEBZ'</span>, {
     server: {
         socketOptions: {
             keppAlive: <span class="hljs-number">1</span> <span class="hljs-comment">//For long running applictions it is often prudent to enable keepAlive. Without it, after some period of time you may start to see "connection closed" errors for what seems like no reason.</span>
@@ -91,11 +104,11 @@
         </li>
         
         
-        <li id="section-2">
+        <li id="section-3">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-2">&#182;</a>
+                <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
               <p>connect to the db</p>
 
@@ -106,13 +119,13 @@
         </li>
         
         
-        <li id="section-3">
+        <li id="section-4">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-3">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>error while connectiong to the db</p>
+              <p>an error occurred while connectiong to the db</p>
 
             </div>
             
@@ -123,43 +136,80 @@
         </li>
         
         
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p>when disconnected -&gt; trying to connect again</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>connection.on(<span class="hljs-string">"disconnected"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Error - trying to reconnect..."</span>);
-    connectToDb();
-});
-
-connection.on(<span class="hljs-string">"open"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Connection to database successful!"</span>);
-
-
-    <span class="hljs-keyword">var</span> roomarray = [{name: <span class="hljs-string">"Salzburg"</span>}, {name: <span class="hljs-string">"Bayern"</span>}, {name: <span class="hljs-string">"Wien"</span>}, {name: <span class="hljs-string">"Tirol"</span>}, {name: <span class="hljs-string">"Burgenland"</span>}];
-    connection.db.collectionNames(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, names</span>) </span>{</pre></div></div>
-            
-        </li>
-        
-        
         <li id="section-5">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
+              <p>when disconnected -&gt; automatically trying to reconnect again</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>connection.on(<span class="hljs-string">"disconnected"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Error - trying to reconnect..."</span>);
+    connectToDb();
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>connection was successful</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>connection.on(<span class="hljs-string">"open"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Connection to database successful!"</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>default rooms to populate the database with</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> roomarray = [{name: <span class="hljs-string">"Salzburg"</span>}, {name: <span class="hljs-string">"Bayern"</span>}, {name: <span class="hljs-string">"Wien"</span>}, {name: <span class="hljs-string">"Tirol"</span>}, {name: <span class="hljs-string">"Burgenland"</span>}];
+    connection.db.collectionNames(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, names</span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
               <p>names contains an array of objects that contain the collection names</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; names.length; i++){
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>delete all old records (to start with a clean db)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; names.length; i++){
           <span class="hljs-keyword">if</span>(names[i].name === <span class="hljs-string">'users'</span>){
             connection.collections[<span class="hljs-string">'users'</span>].drop( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
               <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"\n$ *** USERS SETUP *** $"</span>);
@@ -180,22 +230,9 @@ connection.on(<span class="hljs-string">"open"</span>, <span class="hljs-functio
 
 
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onInsert</span>(<span class="hljs-params">err, docs</span>) </span>{
-        <span class="hljs-keyword">if</span> (err) {</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-6">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
-              </div>
-              <p>TODO: handle error</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>        } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">if</span> (err) {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Error an inser"</span>);
+        } <span class="hljs-keyword">else</span> {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"- Insert initial rooms"</span>);
             <span class="hljs-built_in">console</span>.info(<span class="hljs-string">'- %d rooms were successfully added as default.'</span>, docs.length);
         }
