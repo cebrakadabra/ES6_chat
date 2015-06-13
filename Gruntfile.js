@@ -135,12 +135,6 @@ grunt.initConfig({
         tasks: ['jshint', 'browserify', 'babel', 'docco']
       }
     },
-    mochaTest: {
-      options: {
-        reporter: 'spec'
-      },
-      src: ['test/unit/*.js']
-    },
     env: {
       coverage: {
         APP_DIR_FOR_CODE_COVERAGE: '../test/coverage/instrument/app/'
