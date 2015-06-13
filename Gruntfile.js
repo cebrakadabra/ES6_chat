@@ -169,10 +169,6 @@ grunt.initConfig({
 });
 
 
-grunt.loadNpmTasks('grunt-docco');
-grunt.loadNpmTasks('grunt-mocha-test');
-grunt.loadNpmTasks('grunt-istanbul');
-grunt.loadNpmTasks('grunt-env');
 
 // register Grunt tasks
 grunt.registerTask('default', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
