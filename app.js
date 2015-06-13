@@ -68,21 +68,22 @@ io.sockets.on('connection', function (socket) {
 
   socket.emit('connected',{connected: socket.connected});
 
+  // get default room list from databse
   var rooms = [];
-  var connection = null;
 
-  // connect to database
-  connection = mongoose.createConnection( 'mongodb://localhost/ES6chat2015CEBZ');
+  // room model (mongoose)
+  var Room = require( "./api/room/room" ).model;
+  Room.find( {}).exec(function(err, roomNames){
+    if (err) {
+        console.log( "cannot get Rooms", err );
+        res.send( err );
+    } else {
 
-  // get rooms from database
-  connection.on("open", function() {
-    // read rooms
-    var collection = connection.db.collection('rooms');
-    collection.find().toArray(function(err, roomNames) {
-        for(var i = 0; i < roomNames.length; i++){
-          rooms.push(roomNames[i].name);
-        }
-    });
+      for(var i = 0; i < roomNames.length; i++){
+        rooms.push(roomNames[i].name);
+      }
+
+    }
   });
 
 
@@ -91,9 +92,6 @@ io.sockets.on('connection', function (socket) {
 		// we tell the client to execute 'updatechat' with 2 parameters
 		io.sockets.in(socket.room).emit('updatechat', socket.username, data);
 	});
-
-	// when the client emits 'adduser', this listens and executes
-	socket.on('adduser', function(username, roomName){
 
   // when the client emits 'adduser', this listens and executes
   socket.on('adduser', function(username, roomName){
