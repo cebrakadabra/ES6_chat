@@ -7,11 +7,11 @@
 */
 
 var express = require('express'),
-    app = express(),
+    app = module.exports = express(),
     server = require('http').createServer(app),
     io = require('socket.io').listen(server),
-    bodyParser = require( "body-parser" ),
-    mongoose = require( "mongoose" );
+    bodyParser = require("body-parser"),
+    mongoose = require("mongoose");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -37,7 +37,8 @@ app.get('/', function (req, res) {
 
 
 // let server listen on port
-server.listen(port);
+exports.server = server.listen(port);
+
 console.log("\n$ *** SERVER SETUP *** $");
 console.log("Magic happens on localhost:"+port);
 
@@ -49,6 +50,14 @@ exports = module.exports = app;
 
 
 
+module.exports =  {
+    server: server,
+    start: function() {
+        server.listen(port);
+    }
+};
+
+
 // usernames which are currently connected to the chat
 var usernames = {};
 
@@ -56,6 +65,8 @@ var usernames = {};
 
 
 io.sockets.on('connection', function (socket) {
+
+  socket.emit('connected',{connected: socket.connected});
 
   var rooms = [];
   var connection = null;
@@ -75,6 +86,7 @@ io.sockets.on('connection', function (socket) {
   });
 
 
+<<<<<<< Updated upstream
 
 
 
@@ -86,6 +98,16 @@ io.sockets.on('connection', function (socket) {
     // we tell the client to execute 'updatechat' with 2 parameters
     io.sockets.in(socket.room).emit('updatechat', socket.username, data);
   });
+=======
+	// when the client emits 'sendchat', this listens and executes
+	socket.on('sendchat', function (data) {
+		// we tell the client to execute 'updatechat' with 2 parameters
+		io.sockets.in(socket.room).emit('updatechat', socket.username, data);
+	});
+
+	// when the client emits 'adduser', this listens and executes
+	socket.on('adduser', function(username, roomName){
+>>>>>>> Stashed changes
 
   // when the client emits 'adduser', this listens and executes
   socket.on('adduser', function(username, roomName){

@@ -134,12 +134,64 @@ grunt.initConfig({
         files: ['<%= jshint.files %>'],
         tasks: ['jshint', 'browserify', 'babel', 'docco']
       }
+    },
+    mochaTest: {
+      options: {
+        reporter: 'spec'
+      },
+      src: ['test/unit/*.js']
+    },
+    env: {
+      coverage: {
+        APP_DIR_FOR_CODE_COVERAGE: '../test/coverage/instrument/app/'
+      }
+    },
+    instrument: {
+      files: 'app/*.js',
+      options: {
+        lazy: true,
+        basePath: 'test/coverage/instrument/'
+      }
+    },
+    mochaTest: {
+      options: {
+        reporter: 'spec'
+      },
+      src: ['test/unit/*.js']
+    },
+    storeCoverage: {
+      options: {
+        dir: 'test/coverage/reports'
+      }
+    },
+    makeReport: {
+      src: 'test/coverage/reports/**/*.json',
+      options: {
+        type: 'lcov',
+        dir: 'test/coverage/reports',
+        print: 'detail'
+      }
     }
 });
 
+<<<<<<< Updated upstream
+=======
+grunt.loadNpmTasks('grunt-docco');
+grunt.loadNpmTasks('grunt-mocha-test');
+grunt.loadNpmTasks('grunt-istanbul');
+grunt.loadNpmTasks('grunt-env');
+
+>>>>>>> Stashed changes
 // register Grunt tasks
 grunt.registerTask('default', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'watch']);
+<<<<<<< Updated upstream
 grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 
+=======
+grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint']);
+grunt.registerTask('doc', ['docco']);
+grunt.registerTask('test', ['mochaTest']);
+grunt.registerTask('coverage', ['env:coverage', 'instrument', 'mochaTest', 'storeCoverage', 'makeReport']);
+>>>>>>> Stashed changes
 };
