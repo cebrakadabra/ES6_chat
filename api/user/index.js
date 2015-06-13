@@ -1,6 +1,6 @@
 "use strict";
 
-//handles user create/delete + raumzuweisung???
+//handles user get/create/delete
 
 var router = require("express").Router();
 var urlRoot = router.route( "/" );
