@@ -88,26 +88,7 @@
             
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">var</span> router = <span class="hljs-built_in">require</span>(<span class="hljs-string">"express"</span>).Router();
-<span class="hljs-keyword">var</span> urlRoot = router.route( <span class="hljs-string">"/"</span> );
-
-<span class="hljs-keyword">var</span> User = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./user"</span>).model;
-
-
-urlRoot.get( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res </span>) </span>{
-    User.find( {}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> err, users </span>)</span>{
-        <span class="hljs-keyword">if</span> ( err ) {
-            <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"wasn't able to get Users"</span>, err );
-            res.send( err );
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-keyword">if</span> ( users === <span class="hljs-literal">null</span> ) {
-                users = [];
-            }
-            res.send( users );
-        }
-    });
-});
-
-urlRoot.post( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>{</pre></div></div>
+<span class="hljs-keyword">var</span> urlRoot = router.route( <span class="hljs-string">"/"</span> );</pre></div></div>
             
         </li>
         
@@ -118,31 +99,11 @@ urlRoot.post( <span class="hljs-function"><span class="hljs-keyword">function</s
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>new user</p>
+              <p>using mongoose models</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-  <span class="hljs-keyword">var</span> user = <span class="hljs-keyword">new</span> User({
-    name: req.body.name,
-  });
-
-  user.save( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
-      <span class="hljs-keyword">if</span> (err) {
-        <span class="hljs-keyword">if</span> ( err.code === <span class="hljs-number">11000</span> || err.code === <span class="hljs-number">84</span> ) {
-            res.status(<span class="hljs-number">500</span>).send( {<span class="hljs-string">"error"</span>: <span class="hljs-string">"user allready exists"</span>} );
-        } <span class="hljs-keyword">else</span> {
-            <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"error while creating user "</span>, err );
-            res.status(<span class="hljs-number">500</span>).send( err );
-        }
-      } <span class="hljs-keyword">else</span> {
-          res.status(<span class="hljs-number">200</span>).end();
-      }
-  });
-});
-
-
-<span class="hljs-keyword">var</span> urlName = router.route( <span class="hljs-string">"/:name"</span> );</pre></div></div>
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> User = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./user"</span>).model;</pre></div></div>
             
         </li>
         
@@ -153,11 +114,11 @@ urlRoot.post( <span class="hljs-function"><span class="hljs-keyword">function</s
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>delete user</p>
+              <p>Handling GET Requests (/api/room)</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>urlName.delete( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> req, res </span>) </span>{</pre></div></div>
+            <div class="content"><div class='highlight'><pre>urlRoot.get( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res </span>) </span>{</pre></div></div>
             
         </li>
         
@@ -168,12 +129,168 @@ urlRoot.post( <span class="hljs-function"><span class="hljs-keyword">function</s
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>req.params.name</p>
+              <p>connection to db via mongoose</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>
-  User.findOne( {name: req.params.name} ).remove( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+            <div class="content"><div class='highlight'><pre>    User.find( {}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> err, users </span>)</span>{
+        <span class="hljs-keyword">if</span> ( err ) {
+            <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"wasn't able to get Users"</span>, err );
+            res.send( err );
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">if</span> ( users === <span class="hljs-literal">null</span> ) {
+                users = [];
+            }</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>return the users</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            res.send( users );
+        }
+    });
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Handling POST Requests (/api/room)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>urlRoot.post( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">req, res</span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>create a new user (based on the mongoose User model)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> user = <span class="hljs-keyword">new</span> User({
+    name: req.body.name,
+  });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>connection to db via mongoose</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  user.save( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
+      <span class="hljs-keyword">if</span> (err) {
+        <span class="hljs-keyword">if</span> ( err.code === <span class="hljs-number">11000</span> || err.code === <span class="hljs-number">84</span> ) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>if a username exists - special handling for error messages</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            res.status(<span class="hljs-number">500</span>).send( {<span class="hljs-string">"error"</span>: <span class="hljs-string">"user allready exists"</span>} );
+        } <span class="hljs-keyword">else</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>default error message</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>            <span class="hljs-built_in">console</span>.log( <span class="hljs-string">"error while creating user "</span>, err );
+            res.status(<span class="hljs-number">500</span>).send( err );
+        }
+      } <span class="hljs-keyword">else</span> {
+          res.status(<span class="hljs-number">200</span>).end();
+      }
+  });
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>url definition for existing users</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> urlName = router.route( <span class="hljs-string">"/:name"</span> );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>delete a user</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>urlName.delete( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> req, res </span>) </span>{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>connection to db via mongoose</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  User.findOne( {name: req.params.name} ).remove( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err</span>) </span>{
         <span class="hljs-keyword">if</span> ( err ) {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"wasn't able to remove User "</span>, err);
         } <span class="hljs-keyword">else</span> {

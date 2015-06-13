@@ -73,11 +73,38 @@
             
             <div class="content"><div class='highlight'><pre><span class="hljs-pi">"use strict"</span>;
 
-<span class="hljs-keyword">var</span> mongoose = <span class="hljs-built_in">require</span>( <span class="hljs-string">"mongoose"</span> );
+<span class="hljs-keyword">var</span> mongoose = <span class="hljs-built_in">require</span>( <span class="hljs-string">"mongoose"</span> );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>connection to the database</p>
 
-<span class="hljs-keyword">var</span> db = <span class="hljs-built_in">require</span>( <span class="hljs-string">"../connection.js"</span> );
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> db = <span class="hljs-built_in">require</span>( <span class="hljs-string">"../connection.js"</span> );</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Model for saving users in mongodb
+name is used as (unique) index for this data collection</p>
 
-<span class="hljs-keyword">var</span> userSchema = mongoose.Schema({
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> userSchema = mongoose.Schema({
   name: {
     type: <span class="hljs-built_in">String</span>,
     index: <span class="hljs-literal">true</span>,

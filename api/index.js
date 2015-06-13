@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
+// require the apis of room and user
 var room = require("./room");
 var user = require("./user");
 
