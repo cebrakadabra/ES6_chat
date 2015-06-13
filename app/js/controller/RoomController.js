@@ -16,6 +16,7 @@ class RoomController{
 
       } else{
         console.log("User already exists");
+        $(".rooms").fadeOut();
         $(".usererror").fadeIn();
         $timeout(function(){
           $(".usererror").fadeOut();

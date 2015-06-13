@@ -14,7 +14,7 @@ import { RoomController } from './controller/RoomController';
 import { ChatController } from './controller/ChatController';
 
 // Import Services
-// import { UserService } from './services/UserService';
+import { UserService } from './services/UserService';
 import { RoomService } from './services/RoomService';
 // Import Directives
 
@@ -25,7 +25,7 @@ let chatapp = angular.module('chatApp',
 		'ngRoute',
 		/* 'ngAnimate', */
     /* 'chatapp.controller',*/
-		'chatapp.services',
+		/* 'chatapp.services', */
 		'chatapp.directives',
 		//'luegg.directives'
 
@@ -33,7 +33,7 @@ let chatapp = angular.module('chatApp',
 	.controller('MainCtrl', MainCtrl)
 	.controller('RoomController', RoomController)
 	.controller('ChatController', ChatController)
-	// .service('UserService', UserService)
+	.service('UserService', UserService)
 	.service('RoomService', RoomService);
 
 // Configuration

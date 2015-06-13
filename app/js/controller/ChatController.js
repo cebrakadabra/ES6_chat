@@ -45,11 +45,8 @@ class ChatController{
 				$("#conversation").append("<div class='chatleft'>"+username+" wrote - <small>"+datetime+"</small><br><div class='bubble bubbleleft'>"+data+"</div></div>");
 			}
 
-
-
-
-			// let objDiv = document.getElementById("conversation");
-			// objDiv.scrollTop = objDiv.scrollHeight;
+			let objDiv = document.getElementById("conversation");
+			objDiv.scrollTop = objDiv.scrollHeight;
 		});
 
 
@@ -111,7 +108,7 @@ class ChatController{
 
 		});
 
-		// displaying the username on topleft
+		// displaying the username on topright
 		$scope.socket.on('displayUsername', function(username){
 			// $("#name").append(" - "+ username +"");
 			$scope.$apply(function(){
