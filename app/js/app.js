@@ -26,8 +26,7 @@ let chatapp = angular.module('chatApp',
 		/* 'ngAnimate', */
     /* 'chatapp.controller',*/
 		/* 'chatapp.services', */
-		'chatapp.directives',
-		//'luegg.directives'
+		'chatapp.directives'
 
 	])
 	.controller('MainCtrl', MainCtrl)

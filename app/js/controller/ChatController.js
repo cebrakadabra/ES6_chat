@@ -6,12 +6,10 @@ class ChatController{
 		// on connection to server, ask for user's name with an anonymous callback
 		$scope.socket.on('connect', function(){
 
+      // PRODUCTION USAGE
 			$scope.socket.emit('adduser', $scope.newUser.name, $scope.newUser.room);
-      console.log($scope.newUser.name);
-      console.log($scope.newUser.room);
-			// **************************
-			// **** DEV CONFIG ****
-			// **************************
+
+			// DEV USAGE
 			// only for DEV -- user will be retrieved from window before then (Rooms, as well as romm itself)
 
 			// let date = new Date();
@@ -21,9 +19,6 @@ class ChatController{
 			// });
 			// $scope.socket.emit('adduser', name, "Salzburg");
 
-			// **************************
-			// **** DEV CONFIG END ****
-			// **************************
 
 		});
 
@@ -57,15 +52,11 @@ class ChatController{
 
 		// listener, whenever the server emits 'updateusers', this updates the username list
 		$scope.socket.on('updateusers', function(data) {
-			// $('#users').empty();
-			console.log(data);
 			$scope.users = [];
 			$.each(data, function(key, value) {
-				// $('#users').append('<div class="user"><strong>' + key + '</strong> in ' + room + '</div>');
 				$scope.$apply(function(){
 					$scope.users.push({name: key, room: value});
 				});
-
 			});
 		});
 
@@ -75,18 +66,15 @@ class ChatController{
 
 		// listener, whenever the server emits 'updaterooms', this updates the room the client is in
 		$scope.socket.on('updaterooms', function(rooms, current_room) {
-			// $('#rooms').empty();
 			$scope.roomlist = [];
 			$.each(rooms, function(key, value) {
 				if(value == current_room){
-					// $('#rooms').append('<div>' + value + '</div>');
 					$scope.$apply(function(){
 						$scope.currentroom = null;
 						$scope.currentroom = value;
 					});
 				}
 				else {
-					// $('#rooms').append('<div><a href="#" ng-click="switchRoom(\''+value+'\')">' + value + '</a></div>');
 					$scope.$apply(function(){
 						$scope.roomlist.push(value);
 					});
@@ -111,11 +99,9 @@ class ChatController{
 
 		// displaying the username on topright
 		$scope.socket.on('displayUsername', function(username){
-			// $("#name").append(" - "+ username +"");
 			$scope.$apply(function(){
 				$scope.username = username;
 			});
-
 		});
 
 
