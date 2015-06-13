@@ -1,3 +1,4 @@
+// ES6 MainCtrl
 class MainCtrl {
   constructor($scope, UserService, RoomService){
     console.log("test es6");

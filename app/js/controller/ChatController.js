@@ -1,3 +1,4 @@
+// ES6 ChatController
 class ChatController{
   constructor($scope, UserService, RoomService){
 

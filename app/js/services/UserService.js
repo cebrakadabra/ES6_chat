@@ -1,3 +1,4 @@
+// ES6 UserService
 class UserService{
   constructor($http){
     this.$http = $http;

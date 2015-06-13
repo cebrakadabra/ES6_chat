@@ -1,3 +1,4 @@
+// ES6 RoomService
 class RoomService{
   constructor($http){
     this.$http = $http;

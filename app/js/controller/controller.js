@@ -1,3 +1,4 @@
+// OLD ES5 Controller module
 angular.module('chatapp.controller', [])
 /***
  *

@@ -7,7 +7,6 @@ require('angular-route');
 
 // ES6 imports
 // *************
-
 // Import Controllers
 import { MainCtrl } from './controller/MainCtrl';
 import { RoomController } from './controller/RoomController';
@@ -16,7 +15,7 @@ import { ChatController } from './controller/ChatController';
 // Import Services
 import { UserService } from './services/UserService';
 import { RoomService } from './services/RoomService';
-// Import Directives
+
 
 
 // Create your app

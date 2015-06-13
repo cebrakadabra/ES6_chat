@@ -59,66 +59,67 @@ angular.module('chatapp.services', [])
 	//
 	// }])
 
-	.factory('UserService', ['$interval', '$filter', '$http',  function($interval, $filter, $http){
-		return {
-
-				// Call to get all Users via the Mongoose API
-				get : function() {
-
-				//GET Request
-
-				let data_array = [];
-
-				$http({
-				      method: 'GET',
-				      url: '/api/user'
-				    })
-				    .success(function(data, status, headers, config) {
-				      let rooms = data;
-
-				      for(let i = 0; i < rooms.length; i++){
-				        data_array.push(rooms[i]);
-				      }
-				    })
-				    .error(function(data, status, headers, config) {
-				      console.log("error");
-				      console.log(status);
-				    });
-
-						return {
-							data_array: data_array
-						};
-				},
-
-				// Call to insert a new User into the database via Mongoose API
-				create : function(userData, callback) {
-
-						//POST Request
-
-						$http({
-							method: 'POST',
-							url: '/api/user',
-							data: userData
-							})
-						.success(function(data, status, headers, config) {
-							console.log(status);
-							// bool.value = true;
-							callback(true, userData.name);
-						})
-						.error(function(data, status, headers, config) {
-							console.log(status);
-							// bool.value = false;
-							callback(false, null);
-						});
-
-				},
-
-				// Call to delete a single User in the database via Mongoose API
-				delete : function(name) {
-
-						//DELETE Request
-
-						return $http.delete('/api/user/' + name);
-				}
-		};
-	}]);
+	// .factory('UserService', ['$interval', '$filter', '$http',  function($interval, $filter, $http){
+	// 	return {
+	// 
+	// 			// Call to get all Users via the Mongoose API
+	// 			get : function() {
+	//
+	// 			//GET Request
+	//
+	// 			let data_array = [];
+	//
+	// 			$http({
+	// 			      method: 'GET',
+	// 			      url: '/api/user'
+	// 			    })
+	// 			    .success(function(data, status, headers, config) {
+	// 			      let rooms = data;
+	//
+	// 			      for(let i = 0; i < rooms.length; i++){
+	// 			        data_array.push(rooms[i]);
+	// 			      }
+	// 			    })
+	// 			    .error(function(data, status, headers, config) {
+	// 			      console.log("error");
+	// 			      console.log(status);
+	// 			    });
+	//
+	// 					return {
+	// 						data_array: data_array
+	// 					};
+	// 			},
+	//
+	// 			// Call to insert a new User into the database via Mongoose API
+	// 			create : function(userData, callback) {
+	//
+	// 					//POST Request
+	//
+	// 					$http({
+	// 						method: 'POST',
+	// 						url: '/api/user',
+	// 						data: userData
+	// 						})
+	// 					.success(function(data, status, headers, config) {
+	// 						console.log(status);
+	// 						// bool.value = true;
+	// 						callback(true, userData.name);
+	// 					})
+	// 					.error(function(data, status, headers, config) {
+	// 						console.log(status);
+	// 						// bool.value = false;
+	// 						callback(false, null);
+	// 					});
+	//
+	// 			},
+	//
+	// 			// Call to delete a single User in the database via Mongoose API
+	// 			delete : function(name) {
+	//
+	// 					//DELETE Request
+	//
+	// 					return $http.delete('/api/user/' + name);
+	// 			}
+	// 	};
+	// }])
+	;

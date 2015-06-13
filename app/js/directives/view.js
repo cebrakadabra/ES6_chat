@@ -1,3 +1,4 @@
+// OLD ES5 Directive Module
 angular.module('chatapp.directives', [])
 
 	.directive('sidebarDirective', function() {

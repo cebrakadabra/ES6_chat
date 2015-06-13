@@ -1,3 +1,4 @@
+// ES6 RoomController
 class RoomController{
 
   constructor($scope, UserService, $timeout, $location){
