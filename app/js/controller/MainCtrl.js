@@ -17,8 +17,8 @@ class MainCtrl {
         data: data
       };
       let roomdata = [];
-      for(let i = 0; i < rooms.data.length; i++){
-        $scope.rooms.push(rooms.data[i].name);
+      for(let room of rooms.data){
+        $scope.rooms.push(room.name);
       }
     })
     .error(function(data, status, headers, config) {
