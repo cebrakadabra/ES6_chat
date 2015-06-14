@@ -40,6 +40,7 @@ or if you are a lazy reader and you use mac:
 
 ### Mac - Terminal Look alike
 ![Mac Terminal setup look alike](/images/terminal_setup.png?raw=true "This are the three main terminal windows/tabs you will need on Mac ")
+This are the three main terminal windows/tabs you will need on Mac.
 
 
 
@@ -60,10 +61,16 @@ or if you are a lazy reader and you use mac:
 ####Doku
 * docco
 * /docs directory
+![Docco generation](/images/docco.png?raw=true "Docco creates documentation also on all grunt tasks (default, prod, dev)")
+Docco creates documentation also on all grunt tasks (default, prod, dev)
 
 
 ####Code Coverage
 * Istanbul
+```$ grunt coverage ```
 
 ####Testing
 * Mocha
+```$ grunt test ```
+![Mocha test](/images/mocha_test.png?raw=true "Displays mocha test results")
+Displays mocha test results
