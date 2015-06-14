@@ -143,24 +143,14 @@ grunt.initConfig({
     },
 
     mocha_istanbul: {
-<<<<<<< HEAD
       coverage: {
           src: 'test', // a folder works nicely
           options: {
               mask: '*.js'
           }
       },
-      coverageSpecial: {
-          src: ['testSpecial/*/*.js', 'testUnique/*/*.js'], // specifying file patterns works as well
-          options: {
-              coverageFolder: 'coverageSpecial',
-              mask: '*.spec.js',
-              mochaOptions: ['--harmony','--async-only'], // any extra options
-              istanbulOptions: ['--harmony','--handle-sigint']
-          }
-      },
       coveralls: {
-          src: ['test', 'testSpecial', 'testUnique'], // multiple folders also works
+          src: ['test'],
           options: {
               coverage:true, // this will make the grunt.event.on('coverage') event listener to be triggered
               check: {
@@ -170,50 +160,19 @@ grunt.initConfig({
               root: './lib', // define where the cover task should consider the root of libraries that are covered by tests
               reportFormats: ['cobertura','lcovonly']
           }
-        }
-      },
-      istanbul_check_coverage: {
-        default: {
-          options: {
-            coverageFolder: 'coverage*', // will check both coverage folders and merge the coverage results
-            check: {
-              lines: 80,
-              statements: 80
-=======
-                coverage: {
-                    src: 'test', // a folder works nicely
-                    options: {
-                        mask: '*.js'
-                    }
-                },
-                coveralls: {
-                    src: ['test'],
-                    options: {
-                        coverage:true, // this will make the grunt.event.on('coverage') event listener to be triggered
-                        check: {
-                            lines: 75,
-                            statements: 75
-                        },
-                        root: './lib', // define where the cover task should consider the root of libraries that are covered by tests
-                        reportFormats: ['cobertura','lcovonly']
-                    }
-                }
-            },
-            istanbul_check_coverage: {
-              default: {
-                options: {
-                  coverageFolder: 'coverage*', // will check both coverage folders and merge the coverage results
-                  check: {
-                    lines: 80,
-                    statements: 80
-                  }
-                }
-              }
->>>>>>> origin/master
-            }
+      }
+    },
+    istanbul_check_coverage: {
+      default: {
+        options: {
+          coverageFolder: 'coverage*', // will check both coverage folders and merge the coverage results
+          check: {
+            lines: 80,
+            statements: 80
           }
         }
       }
+    }
 
 });
 
