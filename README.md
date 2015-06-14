@@ -61,6 +61,10 @@ This are the three main terminal windows/tabs you will need on Mac.
 ####Doku
 * docco
 * /docs directory
+
+```$ grunt doc ```
+
+
 ![Docco generation](/images/docco.png?raw=true "Docco creates documentation also on all grunt tasks (default, prod, dev)")
 Docco creates documentation also on all grunt tasks (default, prod, dev)
 
@@ -68,6 +72,9 @@ Docco creates documentation also on all grunt tasks (default, prod, dev)
 ####Code Coverage
 * Istanbul
 ```$ grunt coverage ```
+
+![Istanbul coverage](/images/istanbul_report.png?raw=true "Displays test coverage")
+
 
 ####Testing
 * Mocha
