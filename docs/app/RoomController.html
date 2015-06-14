@@ -105,7 +105,6 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>    $scope.navigate = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">param, userdata</span>)</span>{
-      <span class="hljs-built_in">console</span>.log(userdata);
       <span class="hljs-keyword">if</span>(param){
         $location.path(<span class="hljs-string">"/chat"</span>);
       } <span class="hljs-keyword">else</span>{
@@ -128,8 +127,8 @@
             
             <div class="content"><div class='highlight'><pre>    $scope.selectRoom = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">room</span>)</span>{
       $scope.newUser.room = room;
-      UserService.delete({name: $scope.newUser.name});
-      UserService.create({name: $scope.newUser.name, inRoom: room}, $scope.navigate);
+      <span class="hljs-keyword">let</span> user = $scope.newUser.name;
+      UserService.create({name: user, inRoom: room}, $scope.navigate);
     };</pre></div></div>
             
         </li>
@@ -141,41 +140,49 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>User callback, checks on existance of current user</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    $scope.checkUser = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">param, userdata</span>)</span>{
-      <span class="hljs-keyword">if</span>(param){
-        <span class="hljs-comment">/* User is fine */</span>
-        $scope.newUser.name = userdata.name;
-        $(<span class="hljs-string">".rooms"</span>).fadeIn();
-
-      } <span class="hljs-keyword">else</span>{
-        <span class="hljs-comment">/* User already exists */</span>
-        $(<span class="hljs-string">".rooms"</span>).fadeOut();
-        $(<span class="hljs-string">".usererror"</span>).fadeIn();
-        $timeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-          $(<span class="hljs-string">".usererror"</span>).fadeOut();
-        }, <span class="hljs-number">2500</span>);
-      }
-    };</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-5">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
-              </div>
               <p>initial set User call with callback on checkUser</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>    $scope.setUser = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">username</span>)</span>{
-      UserService.create({name: username, inRoom: <span class="hljs-literal">null</span>}, $scope.checkUser);
+      UserService.get().success(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+
+        <span class="hljs-keyword">if</span>(data[<span class="hljs-number">0</span>] === <span class="hljs-literal">undefined</span>){
+          $scope.newUser.name = username;
+          $(<span class="hljs-string">".rooms"</span>).fadeIn();
+          $timeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+            $(<span class="hljs-string">".usererror"</span>).fadeOut();
+          }, <span class="hljs-number">2500</span>);
+        } <span class="hljs-keyword">else</span>{
+
+          <span class="hljs-keyword">let</span> users = {
+            data: data
+          };
+          <span class="hljs-keyword">let</span> cnt = <span class="hljs-number">0</span>;
+          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> user <span class="hljs-keyword">of</span> users.data){
+            <span class="hljs-keyword">if</span>(user.name != username){
+              cnt++;
+            }
+          }
+          <span class="hljs-built_in">console</span>.log(cnt);
+          <span class="hljs-built_in">console</span>.log(users.data.length);
+          <span class="hljs-keyword">if</span>(cnt === users.data.length){
+            $scope.newUser.name = username;
+            $(<span class="hljs-string">".rooms"</span>).fadeIn();
+          } <span class="hljs-keyword">else</span>{
+            <span class="hljs-comment">/* User already exists */</span>
+            $(<span class="hljs-string">".rooms"</span>).fadeOut();
+            $(<span class="hljs-string">".usererror"</span>).fadeIn();
+          }
+          $timeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+            $(<span class="hljs-string">".usererror"</span>).fadeOut();
+          }, <span class="hljs-number">2500</span>);
+        }
+      })
+      .error(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Error retrieving users"</span>);
+        <span class="hljs-built_in">console</span>.log(status);
+      });
     };
   }
 

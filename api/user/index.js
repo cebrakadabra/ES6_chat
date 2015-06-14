@@ -30,7 +30,6 @@ urlRoot.get( function(req, res ) {
 
 // Handling POST Requests (/api/room)
 urlRoot.post( function(req, res) {
-
   // create a new user (based on the mongoose User model)
   var user = new User({
     name: req.body.name,

@@ -107,7 +107,7 @@ Call to get all Users via the Mongoose API</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>  get(){
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$http,get(<span class="hljs-string">'/api/user'</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$http.get(<span class="hljs-string">'/api/user'</span>);
   }</pre></div></div>
             
         </li>
@@ -149,7 +149,10 @@ Call to insert a new User into the database via Mongoose API</p>
             <div class="content"><div class='highlight'><pre>      callback(<span class="hljs-literal">true</span>, userData);
     })
     .error(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data, status, headers, config</span>) </span>{
-      <span class="hljs-built_in">console</span>.log(status);</pre></div></div>
+      <span class="hljs-built_in">console</span>.log(status);
+      <span class="hljs-built_in">console</span>.log(data);
+      <span class="hljs-built_in">console</span>.log(headers);
+      <span class="hljs-built_in">console</span>.log(config);</pre></div></div>
             
         </li>
         
@@ -164,7 +167,7 @@ Call to insert a new User into the database via Mongoose API</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      callback(<span class="hljs-literal">false</span>, <span class="hljs-literal">null</span>);
+            <div class="content"><div class='highlight'><pre>      callback(<span class="hljs-literal">false</span>, userData);
     });
   }</pre></div></div>
             

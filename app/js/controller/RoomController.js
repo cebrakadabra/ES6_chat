@@ -5,7 +5,6 @@ class RoomController{
 
     // callback function for chat navigation on successful user creation (with room)
     $scope.navigate = function(param, userdata){
-      console.log(userdata);
       if(param){
         $location.path("/chat");
       } else{
@@ -16,30 +15,50 @@ class RoomController{
     // select Room for current user and update user in database
     $scope.selectRoom = function(room){
       $scope.newUser.room = room;
-      UserService.delete({name: $scope.newUser.name});
-      UserService.create({name: $scope.newUser.name, inRoom: room}, $scope.navigate);
-    };
-
-    // User callback, checks on existance of current user
-    $scope.checkUser = function(param, userdata){
-      if(param){
-        /* User is fine */
-        $scope.newUser.name = userdata.name;
-        $(".rooms").fadeIn();
-
-      } else{
-        /* User already exists */
-        $(".rooms").fadeOut();
-        $(".usererror").fadeIn();
-        $timeout(function(){
-          $(".usererror").fadeOut();
-        }, 2500);
-      }
+      let user = $scope.newUser.name;
+      UserService.create({name: user, inRoom: room}, $scope.navigate);
     };
 
     // initial set User call with callback on checkUser
     $scope.setUser = function(username){
-      UserService.create({name: username, inRoom: null}, $scope.checkUser);
+      UserService.get().success(function(data, status, headers, config) {
+
+        if(data[0] === undefined){
+          $scope.newUser.name = username;
+          $(".rooms").fadeIn();
+          $timeout(function(){
+            $(".usererror").fadeOut();
+          }, 2500);
+        } else{
+
+          let users = {
+            data: data
+          };
+          let cnt = 0;
+          for(let user of users.data){
+            if(user.name != username){
+              cnt++;
+            }
+          }
+          console.log(cnt);
+          console.log(users.data.length);
+          if(cnt === users.data.length){
+            $scope.newUser.name = username;
+            $(".rooms").fadeIn();
+          } else{
+            /* User already exists */
+            $(".rooms").fadeOut();
+            $(".usererror").fadeIn();
+          }
+          $timeout(function(){
+            $(".usererror").fadeOut();
+          }, 2500);
+        }
+      })
+      .error(function(data, status, headers, config) {
+        console.log("Error retrieving users");
+        console.log(status);
+      });
     };
   }
 

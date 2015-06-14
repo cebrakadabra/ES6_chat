@@ -6,7 +6,7 @@ class UserService{
   //GET Request
   // Call to get all Users via the Mongoose API
   get(){
-    return this.$http,get('/api/user');
+    return this.$http.get('/api/user');
   }
   // POST Request
   // Call to insert a new User into the database via Mongoose API
@@ -23,8 +23,11 @@ class UserService{
     })
     .error(function(data, status, headers, config) {
       console.log(status);
+      console.log(data);
+      console.log(headers);
+      console.log(config);
       // callback if user creation was not successful
-      callback(false, null);
+      callback(false, userData);
     });
   }
   //DELETE Request
