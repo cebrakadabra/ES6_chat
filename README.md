@@ -71,7 +71,6 @@ Docco creates documentation also on all grunt tasks (default, prod, dev)
 
 ####Code Coverage
 * Istanbul
-
 ```$ grunt coverage ```
 
 ![Istanbul coverage](/images/istanbul_new.png?raw=true "Displays test coverage")
