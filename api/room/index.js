@@ -53,6 +53,9 @@ urlRoot.post( function( req, res) {
   });
 });
 
+// url definition for existing room
+var urlName = router.route( "/:name" );
+
 
 urlName.delete( function( req, res ) {
   console.log("remove room");

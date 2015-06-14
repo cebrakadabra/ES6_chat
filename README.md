@@ -1,10 +1,6 @@
 # ES6-chat
 A simple chat application using a full development stack with ECMAScript6 inside.
 
-## TODO
-* switch to ES6
-* testing
-
 ## Installation instructions
 
 ### Simply clone it and run:
@@ -42,6 +38,9 @@ or if you are a lazy reader and you use mac:
 
 ```$ npm start ```
 
+### Mac - Terminal Look alike
+![Mac Terminal setup look alike](/images/terminal_setup.png?raw=true "This are the three main terminal windows/tabs you will need on Mac ")
+
 
 
 ## Components
@@ -67,4 +66,4 @@ or if you are a lazy reader and you use mac:
 * Istanbul
 
 ####Testing
-* Jasmine
+* Mocha
