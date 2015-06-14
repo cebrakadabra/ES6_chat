@@ -40,8 +40,7 @@ class RoomController{
               cnt++;
             }
           }
-          console.log(cnt);
-          console.log(users.data.length);
+
           if(cnt === users.data.length){
             $scope.newUser.name = username;
             $(".rooms").fadeIn();
