@@ -4,7 +4,7 @@ var chai = require('chai');
 
 var io = require('socket.io-client');
 
-var app = require('../../app').start();
+var app = require('../app').start();
 
 
 describe("Chat tests", function () {

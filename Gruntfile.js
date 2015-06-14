@@ -137,29 +137,28 @@ grunt.initConfig({
     },
     env: {
       coverage: {
-        APP_DIR_FOR_CODE_COVERAGE: '../test/coverage/instrument/app/'
+        APP_DIR_FOR_CODE_COVERAGE: '../test/coverage/instrument'
       }
     },
-    instrument: {
-      files: 'app/*.js',
-      options: {
-        lazy: true,
-        basePath: 'test/coverage/instrument/'
-      }
+    instrument : {
+        files : '*.js',
+        options : {
+            basePath : 'test/coverage/instrument/'
+        }
     },
     mochaTest: {
       options: {
         reporter: 'spec'
       },
-      src: ['test/unit/*.js']
+      src: ['test/*.js']
     },
     storeCoverage: {
       options: {
-        dir: 'test/coverage/reports'
+        dir: 'test/coverage'
       }
     },
     makeReport: {
-      src: 'test/coverage/reports/**/*.json',
+      src: 'test/coverage/*.json',
       options: {
         type: 'lcov',
         dir: 'test/coverage/reports',
@@ -176,6 +175,6 @@ grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jsh
 grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 grunt.registerTask('doc', ['docco']);
 grunt.registerTask('test', ['mochaTest']);
-grunt.registerTask('coverage', ['env:coverage', 'instrument', 'mochaTest', 'storeCoverage', 'makeReport']);
+grunt.registerTask('coverage', [ 'instrument', 'mochaTest', 'makeReport']);
 
 };
