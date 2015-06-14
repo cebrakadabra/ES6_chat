@@ -149,17 +149,8 @@ grunt.initConfig({
                         mask: '*.js'
                     }
                 },
-                coverageSpecial: {
-                    src: ['testSpecial/*/*.js', 'testUnique/*/*.js'], // specifying file patterns works as well
-                    options: {
-                        coverageFolder: 'coverageSpecial',
-                        mask: '*.spec.js',
-                        mochaOptions: ['--harmony','--async-only'], // any extra options
-                        istanbulOptions: ['--harmony','--handle-sigint']
-                    }
-                },
                 coveralls: {
-                    src: ['test', 'testSpecial', 'testUnique'], // multiple folders also works
+                    src: ['test'],
                     options: {
                         coverage:true, // this will make the grunt.event.on('coverage') event listener to be triggered
                         check: {
@@ -199,8 +190,6 @@ grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jsh
 grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 grunt.registerTask('doc', ['docco']);
 grunt.registerTask('test', ['mochaTest']);
-
-grunt.registerTask('coveralls', ['mocha_istanbul:coveralls']);
 grunt.registerTask('coverage', ['mocha_istanbul:coverage']);
 
 };
