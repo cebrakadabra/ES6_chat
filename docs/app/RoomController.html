@@ -175,7 +175,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>    $scope.setUser = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">username</span>)</span>{
-      UserService.create({name: username}, $scope.checkUser);
+      UserService.create({name: username, inRoom: <span class="hljs-literal">null</span>}, $scope.checkUser);
     };
   }
 
