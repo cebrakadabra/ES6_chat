@@ -135,36 +135,60 @@ grunt.initConfig({
         tasks: ['jshint', 'browserify', 'babel', 'docco']
       }
     },
-    env: {
-      coverage: {
-        APP_DIR_FOR_CODE_COVERAGE: '../test/coverage/instrument'
-      }
-    },
-    instrument : {
-        files : '*.js',
-        options : {
-            basePath : 'test/coverage/instrument/'
-        }
-    },
     mochaTest: {
       options: {
         reporter: 'spec'
       },
       src: ['test/*.js']
     },
-    storeCoverage: {
-      options: {
-        dir: 'test/coverage'
-      }
-    },
-    makeReport: {
-      src: 'test/coverage/*.json',
-      options: {
-        type: 'lcov',
-        dir: 'test/coverage/reports',
-        print: 'detail'
-      }
-    }
+
+    mocha_istanbul: {
+                coverage: {
+                    src: 'test', // a folder works nicely
+                    options: {
+                        mask: '*.js'
+                    }
+                },
+                coverageSpecial: {
+                    src: ['testSpecial/*/*.js', 'testUnique/*/*.js'], // specifying file patterns works as well
+                    options: {
+                        coverageFolder: 'coverageSpecial',
+                        mask: '*.spec.js',
+                        mochaOptions: ['--harmony','--async-only'], // any extra options
+                        istanbulOptions: ['--harmony','--handle-sigint']
+                    }
+                },
+                coveralls: {
+                    src: ['test', 'testSpecial', 'testUnique'], // multiple folders also works
+                    options: {
+                        coverage:true, // this will make the grunt.event.on('coverage') event listener to be triggered
+                        check: {
+                            lines: 75,
+                            statements: 75
+                        },
+                        root: './lib', // define where the cover task should consider the root of libraries that are covered by tests
+                        reportFormats: ['cobertura','lcovonly']
+                    }
+                }
+            },
+            istanbul_check_coverage: {
+              default: {
+                options: {
+                  coverageFolder: 'coverage*', // will check both coverage folders and merge the coverage results
+                  check: {
+                    lines: 80,
+                    statements: 80
+                  }
+                }
+              }
+            }
+
+});
+
+
+grunt.event.on('coverage', function(lcovFileContents, done){
+    // Check below on the section "The coverage event"
+    done();
 });
 
 
@@ -175,6 +199,8 @@ grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jsh
 grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 grunt.registerTask('doc', ['docco']);
 grunt.registerTask('test', ['mochaTest']);
-grunt.registerTask('coverage', [ 'instrument', 'mochaTest', 'makeReport']);
+
+grunt.registerTask('coveralls', ['mocha_istanbul:coveralls']);
+grunt.registerTask('coverage', ['mocha_istanbul:coverage']);
 
 };
