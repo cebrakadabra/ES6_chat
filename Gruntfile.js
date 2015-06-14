@@ -143,6 +143,7 @@ grunt.initConfig({
     },
 
     mocha_istanbul: {
+<<<<<<< HEAD
       coverage: {
           src: 'test', // a folder works nicely
           options: {
@@ -178,6 +179,37 @@ grunt.initConfig({
             check: {
               lines: 80,
               statements: 80
+=======
+                coverage: {
+                    src: 'test', // a folder works nicely
+                    options: {
+                        mask: '*.js'
+                    }
+                },
+                coveralls: {
+                    src: ['test'],
+                    options: {
+                        coverage:true, // this will make the grunt.event.on('coverage') event listener to be triggered
+                        check: {
+                            lines: 75,
+                            statements: 75
+                        },
+                        root: './lib', // define where the cover task should consider the root of libraries that are covered by tests
+                        reportFormats: ['cobertura','lcovonly']
+                    }
+                }
+            },
+            istanbul_check_coverage: {
+              default: {
+                options: {
+                  coverageFolder: 'coverage*', // will check both coverage folders and merge the coverage results
+                  check: {
+                    lines: 80,
+                    statements: 80
+                  }
+                }
+              }
+>>>>>>> origin/master
             }
           }
         }
@@ -199,8 +231,6 @@ grunt.registerTask('dev', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jsh
 grunt.registerTask('prod', ['browserify', 'babel', 'sass', 'cssmin', 'copy', 'jshint', 'docco']);
 grunt.registerTask('doc', ['docco']);
 grunt.registerTask('test', ['mochaTest']);
-
-grunt.registerTask('coveralls', ['mocha_istanbul:coveralls']);
 grunt.registerTask('coverage', ['mocha_istanbul:coverage']);
 
 };
