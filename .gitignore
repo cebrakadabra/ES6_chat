@@ -3,15 +3,4 @@ dist/
 app/css/
 npm-debug.log
 *.scssc
-
-test/coverage/reports/lcov-report/test/test.js.html
-
-test/coverage/reports/lcov-report/index.html
-
-test/coverage/reports/lcov.info
-
-test/coverage/coverage.json
-
-coverage/lcov-report/ES6_chat/index.html
-
-coverage/lcov-report/ES6_chat/index.html
+coverage/
