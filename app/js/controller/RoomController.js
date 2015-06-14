@@ -39,7 +39,7 @@ class RoomController{
 
     // initial set User call with callback on checkUser
     $scope.setUser = function(username){
-      UserService.create({name: username}, $scope.checkUser);
+      UserService.create({name: username, inRoom: null}, $scope.checkUser);
     };
   }
 

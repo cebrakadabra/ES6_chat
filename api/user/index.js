@@ -34,6 +34,7 @@ urlRoot.post( function(req, res) {
   // create a new user (based on the mongoose User model)
   var user = new User({
     name: req.body.name,
+    inRoom: req.body.inRoom
   });
 
   // connection to db via mongoose
