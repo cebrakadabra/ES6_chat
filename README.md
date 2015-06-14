@@ -3,7 +3,7 @@ A simple chat application using a full development stack with ECMAScript6 inside
 
 ## Installation instructions
 
-### Simply clone it and run:
+Simply clone it and run:
 
 #### get dependencies:
 ```$ npm install```
@@ -74,3 +74,17 @@ Docco creates documentation also on all grunt tasks (default, prod, dev)
 ```$ grunt test ```
 ![Mocha test](/images/mocha_test.png?raw=true "Displays mocha test results")
 Displays mocha test results
+
+
+## How the Chat looks
+![Chat startpage](/images/startpage.png?raw=true "Chat startpage")
+Chat startpage
+
+![User check](/images/error_on_already_existing_user.png?raw=true "Application checks if user already exists")
+Application checks if user already exists
+
+![User list](/images/userlist.png?raw=true "Sidebar menu displays current user list with room information")
+Sidebar menu displays current user list with room information
+
+![Room list](/images/roomlist.png?raw=true "Sidebar menu displays current room list and a new room can be created")
+Sidebar menu displays current room list and a new room can be created
